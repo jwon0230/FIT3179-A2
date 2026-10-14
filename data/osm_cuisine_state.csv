@@ -1,0 +1,153 @@
+state,cuisine_group,outlets,share_pct,state_outlets_with_cuisine
+Johor,Malaysian,169,15.1,1121
+Johor,Chinese,208,18.6,1121
+Johor,Indian,31,2.8,1121
+Johor,Japanese and Korean,57,5.1,1121
+Johor,Other Southeast Asian,24,2.1,1121
+Johor,Western and fast food,303,27.0,1121
+Johor,Coffee and drinks,161,14.4,1121
+Johor,Sweets and bakery,55,4.9,1121
+Johor,Seafood,27,2.4,1121
+Johor,Other and unspecified,86,7.7,1121
+Kedah,Malaysian,412,44.4,928
+Kedah,Chinese,110,11.9,928
+Kedah,Indian,19,2.0,928
+Kedah,Japanese and Korean,14,1.5,928
+Kedah,Other Southeast Asian,38,4.1,928
+Kedah,Western and fast food,140,15.1,928
+Kedah,Coffee and drinks,76,8.2,928
+Kedah,Sweets and bakery,23,2.5,928
+Kedah,Seafood,20,2.2,928
+Kedah,Other and unspecified,76,8.2,928
+Kelantan,Malaysian,54,23.7,228
+Kelantan,Chinese,19,8.3,228
+Kelantan,Indian,4,1.8,228
+Kelantan,Japanese and Korean,5,2.2,228
+Kelantan,Other Southeast Asian,10,4.4,228
+Kelantan,Western and fast food,72,31.6,228
+Kelantan,Coffee and drinks,18,7.9,228
+Kelantan,Sweets and bakery,13,5.7,228
+Kelantan,Seafood,6,2.6,228
+Kelantan,Other and unspecified,27,11.8,228
+Melaka,Malaysian,39,12.5,311
+Melaka,Chinese,66,21.2,311
+Melaka,Indian,18,5.8,311
+Melaka,Japanese and Korean,13,4.2,311
+Melaka,Other Southeast Asian,6,1.9,311
+Melaka,Western and fast food,84,27.0,311
+Melaka,Coffee and drinks,29,9.3,311
+Melaka,Sweets and bakery,18,5.8,311
+Melaka,Seafood,16,5.1,311
+Melaka,Other and unspecified,22,7.1,311
+Negeri Sembilan,Malaysian,101,25.2,400
+Negeri Sembilan,Chinese,94,23.5,400
+Negeri Sembilan,Indian,22,5.5,400
+Negeri Sembilan,Japanese and Korean,7,1.8,400
+Negeri Sembilan,Other Southeast Asian,6,1.5,400
+Negeri Sembilan,Western and fast food,99,24.8,400
+Negeri Sembilan,Coffee and drinks,38,9.5,400
+Negeri Sembilan,Sweets and bakery,17,4.2,400
+Negeri Sembilan,Seafood,5,1.2,400
+Negeri Sembilan,Other and unspecified,11,2.8,400
+Pahang,Malaysian,115,23.6,487
+Pahang,Chinese,101,20.7,487
+Pahang,Indian,27,5.5,487
+Pahang,Japanese and Korean,7,1.4,487
+Pahang,Other Southeast Asian,17,3.5,487
+Pahang,Western and fast food,90,18.5,487
+Pahang,Coffee and drinks,69,14.2,487
+Pahang,Sweets and bakery,15,3.1,487
+Pahang,Seafood,13,2.7,487
+Pahang,Other and unspecified,33,6.8,487
+Perak,Malaysian,103,16.6,622
+Perak,Chinese,97,15.6,622
+Perak,Indian,31,5.0,622
+Perak,Japanese and Korean,18,2.9,622
+Perak,Other Southeast Asian,15,2.4,622
+Perak,Western and fast food,162,26.0,622
+Perak,Coffee and drinks,101,16.2,622
+Perak,Sweets and bakery,40,6.4,622
+Perak,Seafood,21,3.4,622
+Perak,Other and unspecified,34,5.5,622
+Perlis,Malaysian,9,25.7,35
+Perlis,Chinese,1,2.9,35
+Perlis,Indian,1,2.9,35
+Perlis,Japanese and Korean,1,2.9,35
+Perlis,Other Southeast Asian,3,8.6,35
+Perlis,Western and fast food,13,37.1,35
+Perlis,Coffee and drinks,4,11.4,35
+Perlis,Sweets and bakery,1,2.9,35
+Perlis,Other and unspecified,2,5.7,35
+Pulau Pinang,Malaysian,129,10.3,1247
+Pulau Pinang,Chinese,250,20.0,1247
+Pulau Pinang,Indian,52,4.2,1247
+Pulau Pinang,Japanese and Korean,82,6.6,1247
+Pulau Pinang,Other Southeast Asian,41,3.3,1247
+Pulau Pinang,Western and fast food,258,20.7,1247
+Pulau Pinang,Coffee and drinks,252,20.2,1247
+Pulau Pinang,Sweets and bakery,80,6.4,1247
+Pulau Pinang,Seafood,19,1.5,1247
+Pulau Pinang,Other and unspecified,84,6.7,1247
+Sabah,Malaysian,61,11.0,557
+Sabah,Chinese,104,18.7,557
+Sabah,Indian,13,2.3,557
+Sabah,Japanese and Korean,37,6.6,557
+Sabah,Other Southeast Asian,14,2.5,557
+Sabah,Western and fast food,155,27.8,557
+Sabah,Coffee and drinks,57,10.2,557
+Sabah,Sweets and bakery,44,7.9,557
+Sabah,Seafood,21,3.8,557
+Sabah,Other and unspecified,51,9.2,557
+Sarawak,Malaysian,310,15.7,1978
+Sarawak,Chinese,583,29.5,1978
+Sarawak,Indian,46,2.3,1978
+Sarawak,Japanese and Korean,72,3.6,1978
+Sarawak,Other Southeast Asian,42,2.1,1978
+Sarawak,Western and fast food,394,19.9,1978
+Sarawak,Coffee and drinks,195,9.9,1978
+Sarawak,Sweets and bakery,105,5.3,1978
+Sarawak,Seafood,64,3.2,1978
+Sarawak,Other and unspecified,167,8.4,1978
+Selangor,Malaysian,470,15.7,3003
+Selangor,Chinese,457,15.2,3003
+Selangor,Indian,116,3.9,3003
+Selangor,Japanese and Korean,98,3.3,3003
+Selangor,Other Southeast Asian,85,2.8,3003
+Selangor,Western and fast food,773,25.7,3003
+Selangor,Coffee and drinks,515,17.1,3003
+Selangor,Sweets and bakery,215,7.2,3003
+Selangor,Seafood,62,2.1,3003
+Selangor,Other and unspecified,212,7.1,3003
+Terengganu,Malaysian,74,41.8,177
+Terengganu,Chinese,9,5.1,177
+Terengganu,Japanese and Korean,4,2.3,177
+Terengganu,Other Southeast Asian,1,0.6,177
+Terengganu,Western and fast food,49,27.7,177
+Terengganu,Coffee and drinks,9,5.1,177
+Terengganu,Sweets and bakery,10,5.6,177
+Terengganu,Seafood,8,4.5,177
+Terengganu,Other and unspecified,13,7.3,177
+Kuala Lumpur,Malaysian,195,9.8,2000
+Kuala Lumpur,Chinese,330,16.5,2000
+Kuala Lumpur,Indian,150,7.5,2000
+Kuala Lumpur,Japanese and Korean,126,6.3,2000
+Kuala Lumpur,Other Southeast Asian,70,3.5,2000
+Kuala Lumpur,Western and fast food,477,23.8,2000
+Kuala Lumpur,Coffee and drinks,341,17.1,2000
+Kuala Lumpur,Sweets and bakery,118,5.9,2000
+Kuala Lumpur,Seafood,25,1.2,2000
+Kuala Lumpur,Other and unspecified,168,8.4,2000
+Labuan,Malaysian,5,21.7,23
+Labuan,Indian,3,13.0,23
+Labuan,Japanese and Korean,1,4.3,23
+Labuan,Western and fast food,6,26.1,23
+Labuan,Coffee and drinks,3,13.0,23
+Labuan,Seafood,2,8.7,23
+Labuan,Other and unspecified,3,13.0,23
+Putrajaya,Malaysian,6,14.0,43
+Putrajaya,Chinese,1,2.3,43
+Putrajaya,Other Southeast Asian,1,2.3,43
+Putrajaya,Western and fast food,15,34.9,43
+Putrajaya,Coffee and drinks,12,27.9,43
+Putrajaya,Sweets and bakery,7,16.3,43
+Putrajaya,Other and unspecified,1,2.3,43

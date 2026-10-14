@@ -1,0 +1,185 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "Mapped eating places crowd the west coast and the big towns",
+    "subtitle": "One dot is one of the 26,744 Malaysian eating places volunteers have put on the map, October 2026",
+    "anchor": "middle"
+  },
+  "width": "container",
+  "height": 330,
+  "params": [
+    {
+      "name": "kind",
+      "value": null,
+      "bind": {
+        "input": "select",
+        "options": [null, "Restaurant", "Cafe", "Fast food"],
+        "labels": ["All outlets", "Restaurants", "Cafes", "Fast food"],
+        "name": "Kind of outlet  "
+      }
+    }
+  ],
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [4.37, -4.37],
+    "rotate": [-109.6, 0],
+    "fit": {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {"type": "MultiPoint", "coordinates": [[94.6, 0.6], [119.4, 7.6]]}
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/my_states.topo.json",
+        "format": {"type": "topojson", "feature": "states"}
+      },
+      "mark": {"type": "geoshape", "fill": "#e8e8e8", "stroke": "#999999", "strokeWidth": 0.5},
+      "encoding": {"tooltip": {"value": "No data"}}
+    },
+    {
+      "data": {
+        "url": "data/osm_state.csv",
+        "format": {
+          "parse": {
+            "outlets": "number",
+            "restaurants": "number",
+            "cafes": "number",
+            "fast_food": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "url": "data/my_states.topo.json",
+              "format": {"type": "topojson", "feature": "states"}
+            },
+            "key": "properties.state"
+          },
+          "as": "geo"
+        },
+        {
+          "calculate": "kind == null ? datum.outlets : kind == 'Restaurant' ? datum.restaurants : kind == 'Cafe' ? datum.cafes : datum.fast_food",
+          "as": "shown"
+        }
+      ],
+      "mark": {"type": "geoshape", "fill": "#e8e8e8", "stroke": "#999999", "strokeWidth": 0.5},
+      "encoding": {
+        "shape": {"field": "geo", "type": "geojson"},
+        "tooltip": [
+          {"field": "state", "title": "State"},
+          {"field": "shown", "title": "Mapped outlets", "format": ","}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/osm_points.csv",
+        "format": {"parse": {"lon": "number", "lat": "number"}}
+      },
+      "transform": [
+        {"filter": "kind == null || datum.type == kind"},
+        {"calculate": "'One mapped eating place'", "as": "key"}
+      ],
+      "mark": {"type": "circle", "size": 6, "opacity": 0.35},
+      "encoding": {
+        "longitude": {"field": "lon"},
+        "latitude": {"field": "lat"},
+        "color": {
+          "field": "key",
+          "type": "nominal",
+          "title": null,
+          "scale": {"domain": ["One mapped eating place"], "range": ["#2b8cbe"]},
+          "legend": {
+            "orient": "none",
+            "legendX": {"expr": "width / 2 - 88"},
+            "legendY": {"expr": "height - 24"},
+            "direction": "horizontal",
+            "symbolType": "circle",
+            "symbolSize": 60,
+            "symbolOpacity": 0.8,
+            "symbolStrokeWidth": 0
+          }
+        },
+        "tooltip": [{"field": "type", "title": "Kind of outlet"}]
+      }
+    },
+    {
+      "data": {"values": [{"lon": 101.4, "lat": 3.2, "lon2": 98.8, "lat2": 4.6}]},
+      "mark": {"type": "rule", "color": "#111111", "strokeWidth": 0.8},
+      "encoding": {
+        "longitude": {"field": "lon"},
+        "latitude": {"field": "lat"},
+        "longitude2": {"field": "lon2"},
+        "latitude2": {"field": "lat2"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"k": "All", "lon2": 98.8, "lat2": 4.6, "lines": ["Selangor and Kuala", "Lumpur hold 9,803", "of the 26,744 mapped", "outlets, 36.7%"]},
+          {"k": "Restaurant", "lon2": 98.8, "lat2": 4.6, "lines": ["Selangor and Kuala", "Lumpur hold 6,477", "of the 17,474 mapped", "restaurants, 37.1%"]},
+          {"k": "Cafe", "lon2": 98.8, "lat2": 4.6, "lines": ["Selangor and Kuala", "Lumpur hold 1,987", "of the 5,383 mapped", "cafes, 36.9%"]},
+          {"k": "Fast food", "lon2": 98.8, "lat2": 4.6, "lines": ["Selangor and Kuala", "Lumpur hold 1,339 of", "the 3,887 mapped fast", "food outlets, 34.4%"]}
+        ]
+      },
+      "transform": [{"filter": "datum.k == (kind == null ? 'All' : kind)"}],
+      "mark": {"type": "text", "align": "right", "dx": -6, "fontSize": 14, "lineHeight": 18, "baseline": "middle"},
+      "encoding": {
+        "longitude": {"field": "lon2"},
+        "latitude": {"field": "lat2"},
+        "text": {"field": "lines"}
+      }
+    }
+  ],
+  "config": {
+    "font": "'Bricolage Grotesque', Arial, sans-serif",
+    "background": "#ffffff",
+    "view": {"stroke": null},
+    "title": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 22,
+      "fontWeight": 700,
+      "color": "#111111",
+      "anchor": "start",
+      "offset": 14,
+      "subtitleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "subtitleFontSize": 15,
+      "subtitleColor": "#666666",
+      "subtitlePadding": 6
+    },
+    "axis": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#555555",
+      "labelPadding": 6,
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "domainColor": "#999999",
+      "tickColor": "#999999",
+      "gridColor": "#ebebeb"
+    },
+    "legend": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#333333",
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "titlePadding": 6
+    },
+    "text": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 14,
+      "color": "#111111"
+    },
+    "rule": {"color": "#111111"}
+  }
+}

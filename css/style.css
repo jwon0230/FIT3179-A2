@@ -1,0 +1,295 @@
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #111111;
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 22px;
+  line-height: 32px;
+}
+.col {
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+/* title sign */
+.hero {
+  background: linear-gradient(#262522 calc(100% - 160px), #ffffff 100%);
+  padding: 72px 0 208px;
+  margin-bottom: 32px;
+}
+.sign {
+  max-width: 1040px;
+  margin: 0 auto 48px;
+  padding: 0 16px;
+}
+.hero .dek {
+  color: #e8dfca;
+}
+.hero .byline {
+  color: #b8ae9a;
+  margin: 0;
+}
+.sign-panel {
+  border: 10px solid #c9cdd0;
+  outline: 1px solid #8f969b;
+  background: radial-gradient(ellipse at 50% 45%, #ffffff 45%, #f0f0eb 100%);
+  padding: 26px 40px 22px;
+  text-align: center;
+}
+.sign-zh {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 900;
+  font-size: 80px;
+  line-height: 92px;
+  letter-spacing: 24px;
+  text-indent: 24px;
+  color: #9e2e34;
+  margin: 0;
+}
+h1 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 800;
+  font-size: 76px;
+  line-height: 80px;
+  letter-spacing: -1px;
+  color: #2e563a;
+  margin: 4px 0 0;
+}
+.sign-price {
+  font-family: 'Bricolage Grotesque', Arial, sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 32px;
+  color: #9e2e34;
+  text-align: right;
+  margin: 2px 0 0;
+}
+.sign-price span {
+  display: block;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+  color: #333333;
+}
+.dek {
+  font-size: 23px;
+  line-height: 31px;
+  color: #333333;
+  margin: 0 0 24px;
+}
+.byline {
+  font-family: 'Bricolage Grotesque', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  color: #666666;
+  margin: 0 0 48px;
+}
+p {
+  margin: 0 0 24px;
+}
+a {
+  color: #2e6b3f;
+}
+.key {
+  color: #2e6b3f;
+}
+h2 {
+  font-family: 'Bricolage Grotesque', Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  font-size: 34px;
+  line-height: 38px;
+  margin: 0 0 16px;
+}
+.opener {
+  margin-top: 160px;
+}
+
+/* sticky stage */
+.scrolly {
+  position: relative;
+  margin: 56px 0 12px;
+}
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.stage .chart {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.steps {
+  position: relative;
+  margin-top: -100vh;
+}
+.step {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card {
+  width: 290px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 18px 20px;
+  font-size: 18px;
+  line-height: 27px;
+}
+.card p {
+  margin: 0;
+}
+.card .note {
+  margin-top: 10px;
+}
+.stage svg path {
+  transition: fill 0.6s, opacity 0.6s, stroke-opacity 0.6s;
+}
+.stage svg text {
+  transition: opacity 0.6s;
+}
+
+/* in-flow figures */
+figure {
+  max-width: 1040px;
+  margin: 56px auto;
+  padding: 0 16px;
+}
+figcaption, .credit {
+  font-family: 'Bricolage Grotesque', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  color: #666666;
+  max-width: 440px;
+  margin: 12px auto 0;
+}
+.credit {
+  margin-bottom: 56px;
+}
+.chart {
+  width: 100%;
+}
+.row {
+  display: flex;
+  gap: 30px;
+}
+.row .chart {
+  flex: 0 0 505px;
+  min-width: 0;
+}
+.vega-bindings {
+  font-family: 'Bricolage Grotesque', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  color: #333333;
+  margin-top: 12px;
+  text-align: center;
+}
+.vega-bindings select {
+  appearance: none;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 22px;
+  color: #111111;
+  padding: 8px 40px 8px 16px;
+  margin-left: 6px;
+  border: none;
+  border-radius: 12px;
+  background: #f0f0f0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23555555' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 16px center;
+  cursor: pointer;
+}
+
+/* dropdown list where the browser allows styling it */
+@supports (appearance: base-select) {
+  .vega-bindings select,
+  .vega-bindings select::picker(select) {
+    appearance: base-select;
+  }
+  .vega-bindings select {
+    background-image: none;
+    padding-right: 16px;
+  }
+  .vega-bindings select::picker-icon {
+    color: #555555;
+  }
+  .vega-bindings select::picker(select) {
+    border: 1px solid #e0e0e0;
+    border-radius: 14px;
+    background: #ffffff;
+    padding: 2px 6px;
+    margin-top: 6px;
+  }
+  .vega-bindings option {
+    border-radius: 10px;
+    background: #f0f0f0;
+    padding: 8px 16px;
+    margin: 4px 0;
+  }
+  .vega-bindings option:hover {
+    background: #e2e2e2;
+  }
+  .vega-bindings option:checked {
+    background: #2e6b3f;
+    color: #ffffff;
+  }
+  .vega-bindings option::checkmark {
+    display: none;
+  }
+}
+.note {
+  font-family: 'Bricolage Grotesque', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  color: #666666;
+  max-width: 440px;
+  margin: 12px auto 0;
+}
+figure .note {
+  text-align: center;
+}
+
+footer {
+  margin-top: 120px;
+  padding: 40px 0 80px;
+  background: #f4f4f4;
+  font-family: 'Bricolage Grotesque', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 23px;
+  color: #333333;
+}
+footer h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 24px 0 4px;
+}
+footer p, footer ul {
+  margin: 0 0 8px;
+}
+footer ul {
+  padding-left: 18px;
+}
+
+/* static view */
+.static .stage {
+  position: static;
+  height: auto;
+}
+.static .steps {
+  margin-top: 0;
+}
+.static .step {
+  height: auto;
+  padding: 12px 16px;
+}
+.static .card .note {
+  display: none;
+}
+.static .card {
+  width: 440px;
+  padding: 0;
+  font-size: 22px;
+  line-height: 32px;
+}

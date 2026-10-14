@@ -1,0 +1,199 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": ["Money taken for every eating place", "almost doubled, except in catering"],
+    "subtitle": [
+      "Money taken divided by the number of eating places,",
+      "by part of the trade, Malaysia, census years 2015 and 2022,",
+      "in ringgit of each year, not adjusted for prices"
+    ]
+  },
+  "width": 207,
+  "height": 330,
+  "layer": [
+    {
+      "data": {"values": [{"year": "2015"}, {"year": "2022"}]},
+      "mark": {"type": "rule", "color": "#999999", "strokeWidth": 1},
+      "encoding": {"x": {"field": "year", "type": "ordinal", "sort": ["2015", "2022"]}}
+    },
+    {
+      "data": {
+        "url": "data/census_subsector.csv",
+        "format": {"parse": {"establishments": "number", "gross_output_rm_mil": "number"}}
+      },
+      "transform": [
+        {"filter": {"field": "year", "oneOf": ["2015", "2022"]}},
+        {
+          "calculate": "round(datum.gross_output_rm_mil * 1000 / datum.establishments) * 1000",
+          "as": "rm_per_place"
+        }
+      ],
+      "mark": {"type": "line", "point": {"filled": true, "size": 70}, "strokeWidth": 2.5},
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "sort": ["2015", "2022"],
+          "title": null,
+          "scale": {"type": "point", "padding": 0},
+          "axis": {
+            "orient": "top",
+            "labelAngle": 0,
+            "labelFontSize": 14,
+            "labelFontWeight": 600,
+            "labelColor": "#333333",
+            "labelPadding": 14,
+            "ticks": false,
+            "domain": false
+          }
+        },
+        "y": {
+          "field": "rm_per_place",
+          "type": "quantitative",
+          "title": "Money taken for every eating place, RM",
+          "scale": {"domain": [0, 800000]},
+          "axis": {
+            "values": [0, 200000, 400000, 600000, 800000],
+            "labelExpr": "format(datum.value, ',')",
+            "grid": true,
+            "titlePadding": 10
+          }
+        },
+        "color": {
+          "field": "subsector",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Food services", "Beverage services", "Event catering"],
+            "range": ["#2e6b3f", "#555555", "#999999"]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "subsector", "title": "Part of the trade"},
+          {"field": "year", "title": "Census year"},
+          {"field": "rm_per_place", "title": "Money taken for every eating place, RM", "format": ","},
+          {"field": "establishments", "title": "Eating places", "format": ","},
+          {"field": "gross_output_rm_mil", "title": "Money taken, RM million", "format": ",.1f"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/census_subsector.csv",
+        "format": {"parse": {"establishments": "number", "gross_output_rm_mil": "number"}}
+      },
+      "transform": [
+        {"filter": {"field": "year", "oneOf": ["2022"]}},
+        {
+          "calculate": "round(datum.gross_output_rm_mil * 1000 / datum.establishments) * 1000",
+          "as": "rm_per_place"
+        },
+        {
+          "calculate": "datum.subsector + ', RM ' + format(datum.rm_per_place, ',')",
+          "as": "end_label"
+        },
+        {
+          "calculate": "datum.subsector == 'Food services' ? '#2e6b3f' : datum.subsector == 'Beverage services' ? '#555555' : '#666666'",
+          "as": "label_colour"
+        }
+      ],
+      "mark": {"type": "text", "align": "left", "dx": 9, "fontSize": 13, "fontWeight": 600, "baseline": "middle"},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal", "sort": ["2015", "2022"]},
+        "y": {"field": "rm_per_place", "type": "quantitative"},
+        "text": {"field": "end_label"},
+        "color": {"field": "label_colour", "type": "nominal", "scale": null, "legend": null}
+      }
+    },
+    {
+      "data": {
+        "values": [{"year": "2015", "yv": 720000, "lines": ["Food services", "almost doubled"]}]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "fontSize": 14,
+        "lineHeight": 18,
+        "baseline": "middle",
+        "color": "#2e6b3f",
+        "fontWeight": 600
+      },
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal", "sort": ["2015", "2022"]},
+        "y": {"field": "yv", "type": "quantitative"},
+        "text": {"field": "lines"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": "2015",
+            "yv": 200000,
+            "lines": ["In 2015 all three took", "about the same, between", "RM 357,000 and", "RM 401,000"]
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "fontSize": 14,
+        "lineHeight": 18,
+        "baseline": "middle"
+      },
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal", "sort": ["2015", "2022"]},
+        "y": {"field": "yv", "type": "quantitative"},
+        "text": {"field": "lines"}
+      }
+    }
+  ],
+  "config": {
+    "font": "'Bricolage Grotesque', Arial, sans-serif",
+    "background": "#ffffff",
+    "view": {"stroke": null},
+    "title": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 22,
+      "fontWeight": 700,
+      "color": "#111111",
+      "anchor": "start",
+      "offset": 14,
+      "subtitleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "subtitleFontSize": 15,
+      "subtitleColor": "#666666",
+      "subtitlePadding": 6
+    },
+    "axis": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#555555",
+      "labelPadding": 6,
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "domainColor": "#999999",
+      "tickColor": "#999999",
+      "gridColor": "#ebebeb"
+    },
+    "legend": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#333333",
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "titlePadding": 6
+    },
+    "text": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 14,
+      "color": "#111111"
+    },
+    "rule": {"color": "#111111"}
+  }
+}

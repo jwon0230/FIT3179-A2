@@ -1,0 +1,183 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "Western and fast food leads in eight of the twelve states",
+    "subtitle": [
+      "Each kind of food's share of a state's mapped eating places that name a cuisine, Malaysia, October 2026",
+      "The twelve states with at least 200 such outlets. Darker cells are larger shares; a white dot marks each state's biggest group."
+    ]
+  },
+  "width": "container",
+  "height": 420,
+  "encoding": {
+    "x": {
+      "field": "cuisine_group",
+      "type": "ordinal",
+      "title": "Kind of food",
+      "sort": [
+        "Western and fast food",
+        "Chinese",
+        "Malaysian",
+        "Coffee and drinks",
+        "Other and unspecified",
+        "Sweets and bakery",
+        "Japanese and Korean",
+        "Indian",
+        "Other Southeast Asian",
+        "Seafood"
+      ],
+      "axis": {
+        "labelAngle": -40,
+        "labelAlign": "right",
+        "labelBaseline": "middle",
+        "labelLimit": 200,
+        "titlePadding": 14
+      }
+    },
+    "y": {
+      "field": "state",
+      "type": "ordinal",
+      "title": "State",
+      "sort": [
+        "Selangor",
+        "Kuala Lumpur",
+        "Sarawak",
+        "Pulau Pinang",
+        "Johor",
+        "Kedah",
+        "Perak",
+        "Sabah",
+        "Pahang",
+        "Negeri Sembilan",
+        "Melaka",
+        "Kelantan"
+      ],
+      "axis": {"labelLimit": 200, "titlePadding": 10}
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/osm_cuisine_state.csv",
+        "format": {
+          "parse": {
+            "outlets": "number",
+            "share_pct": "number",
+            "state_outlets_with_cuisine": "number"
+          }
+        }
+      },
+      "transform": [
+        {"filter": "datum.state_outlets_with_cuisine >= 200"},
+        {
+          "calculate": "datum.share_pct < 5 ? 'Under 5%' : datum.share_pct < 10 ? '5 to 10%' : datum.share_pct < 20 ? '10 to 20%' : datum.share_pct < 30 ? '20 to 30%' : '30% or more'",
+          "as": "band"
+        },
+        {"calculate": "format(datum.share_pct, '.1f') + '%'", "as": "share_text"}
+      ],
+      "mark": {"type": "rect", "stroke": "#ffffff", "strokeWidth": 1},
+      "encoding": {
+        "color": {
+          "field": "band",
+          "type": "ordinal",
+          "title": "Share of a state's outlets that name a cuisine",
+          "scale": {
+            "domain": ["Under 5%", "5 to 10%", "10 to 20%", "20 to 30%", "30% or more"],
+            "range": ["#f1eef6", "#bdc9e1", "#74a9cf", "#2b8cbe", "#045a8d"]
+          },
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal",
+            "columns": 5,
+            "columnPadding": 16,
+            "titleOrient": "top",
+            "titleAnchor": "start",
+            "titleLimit": 420,
+            "symbolType": "square",
+            "symbolSize": 180,
+            "symbolStrokeWidth": 0,
+            "offset": 12
+          }
+        },
+        "tooltip": [
+          {"field": "state", "title": "State"},
+          {"field": "cuisine_group", "title": "Kind of food"},
+          {"field": "share_text", "title": "Share of the state's outlets"},
+          {"field": "outlets", "title": "Mapped outlets"},
+          {"field": "state_outlets_with_cuisine", "title": "State outlets that name a cuisine", "format": ","}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/osm_cuisine_state.csv",
+        "format": {"parse": {"share_pct": "number", "state_outlets_with_cuisine": "number"}}
+      },
+      "transform": [
+        {"filter": "datum.state_outlets_with_cuisine >= 200"},
+        {
+          "window": [{"op": "rank", "as": "rank_in_state"}],
+          "groupby": ["state"],
+          "sort": [{"field": "share_pct", "order": "descending"}]
+        },
+        {"filter": "datum.rank_in_state === 1"}
+      ],
+      "mark": {"type": "circle", "size": 55, "color": "#ffffff", "opacity": 1, "xOffset": 30}
+    },
+    {
+      "data": {"values": [{"state": "Kedah", "cuisine_group": "Malaysian"}]},
+      "mark": {"type": "rect", "filled": false, "stroke": "#2e6b3f", "strokeWidth": 2.2}
+    },
+    {
+      "data": {"values": [{"state": "Kedah", "cuisine_group": "Malaysian", "label": "44.4%"}]},
+      "mark": {"type": "text", "fontSize": 13, "fontWeight": 700, "color": "#ffffff"},
+      "encoding": {"text": {"field": "label"}}
+    }
+  ],
+  "config": {
+    "font": "'Bricolage Grotesque', Arial, sans-serif",
+    "background": "#ffffff",
+    "view": {"stroke": null},
+    "title": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 22,
+      "fontWeight": 700,
+      "color": "#111111",
+      "anchor": "start",
+      "offset": 14,
+      "subtitleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "subtitleFontSize": 15,
+      "subtitleColor": "#666666",
+      "subtitlePadding": 6
+    },
+    "axis": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#555555",
+      "labelPadding": 6,
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "domainColor": "#999999",
+      "tickColor": "#999999",
+      "gridColor": "#ebebeb"
+    },
+    "legend": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#333333",
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "titlePadding": 6
+    },
+    "text": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 14,
+      "color": "#111111"
+    },
+    "rule": {"color": "#111111"}
+  }
+}

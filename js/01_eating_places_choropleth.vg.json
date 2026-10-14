@@ -1,0 +1,234 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "Kuala Lumpur has the most eating places for its people",
+    "subtitle": "Eating places for every 100,000 people, by state, Malaysia, 2022",
+    "anchor": "middle"
+  },
+  "width": "container",
+  "height": 520,
+  "params": [{"name": "step", "value": 1}],
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [4.37, -4.37],
+    "rotate": [-109.6, 0],
+    "fit": {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {"type": "MultiPoint", "coordinates": [[94.0, 0.6], [120.0, 7.6]]}
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/my_states.topo.json",
+        "format": {"type": "topojson", "feature": "states"}
+      },
+      "mark": {"type": "geoshape", "fill": "#e8e8e8", "stroke": "#999999", "strokeWidth": 0.5},
+      "encoding": {"tooltip": {"value": "No data"}}
+    },
+    {
+      "data": {
+        "url": "data/census_state.csv",
+        "format": {
+          "parse": {
+            "establishments": "number",
+            "population_2022": "number",
+            "establishments_per_100k": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "url": "data/my_states.topo.json",
+              "format": {"type": "topojson", "feature": "states"}
+            },
+            "key": "properties.state"
+          },
+          "as": "geo"
+        },
+        {"calculate": "indexof(['Selangor', 'Kuala Lumpur', 'Putrajaya'], datum.state) >= 0", "as": "klang"},
+        {"calculate": "indexof(['Sabah', 'Sarawak', 'Labuan'], datum.state) >= 0", "as": "borneo"},
+        {
+          "calculate": "datum.establishments_per_100k < 300 ? 'Under 300' : datum.establishments_per_100k < 400 ? '300 to 400' : datum.establishments_per_100k < 500 ? '400 to 500' : datum.establishments_per_100k < 600 ? '500 to 600' : '600 or more'",
+          "as": "band"
+        }
+      ],
+      "mark": {"type": "geoshape", "stroke": "#999999", "strokeWidth": 0.5},
+      "encoding": {
+        "shape": {"field": "geo", "type": "geojson"},
+        "color": {
+          "condition": {"test": "(step == 2 && !datum.klang) || (step == 3 && !datum.borneo)", "value": "#e8e8e8"},
+          "field": "band",
+          "type": "ordinal",
+          "title": "Eating places for every 100,000 people",
+          "scale": {
+            "domain": ["Under 300", "300 to 400", "400 to 500", "500 to 600", "600 or more"],
+            "range": ["#f1eef6", "#bdc9e1", "#74a9cf", "#2b8cbe", "#045a8d"]
+          },
+          "legend": {
+            "orient": "none",
+            "legendX": {"expr": "width / 2 - 253"},
+            "legendY": {"expr": "height - 52"},
+            "direction": "horizontal",
+            "columns": 5,
+            "columnPadding": 16,
+            "titleOrient": "top",
+            "titleAnchor": "middle",
+            "titleLimit": 400,
+            "symbolType": "square",
+            "symbolSize": 180,
+            "symbolStrokeWidth": 0
+          }
+        },
+        "tooltip": [
+          {"field": "state", "title": "State"},
+          {"field": "establishments_per_100k", "title": "Eating places for every 100,000 people", "format": ",.0f"},
+          {"field": "establishments", "title": "Eating places", "format": ","}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/census_state.csv",
+        "format": {"parse": {"establishments": "number", "establishments_per_100k": "number"}}
+      },
+      "transform": [
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "url": "data/my_states.topo.json",
+              "format": {"type": "topojson", "feature": "states"}
+            },
+            "key": "properties.state"
+          },
+          "as": "geo"
+        },
+        {"calculate": "indexof(['Selangor', 'Kuala Lumpur', 'Putrajaya'], datum.state) >= 0", "as": "klang"},
+        {"calculate": "indexof(['Sabah', 'Sarawak', 'Labuan'], datum.state) >= 0", "as": "borneo"}
+      ],
+      "mark": {"type": "geoshape", "filled": false, "stroke": "#2e6b3f", "strokeWidth": 1.6},
+      "encoding": {
+        "shape": {"field": "geo", "type": "geojson"},
+        "strokeOpacity": {
+          "condition": {"test": "(step == 2 && datum.klang) || (step == 3 && datum.borneo)", "value": 1},
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "state", "title": "State"},
+          {"field": "establishments_per_100k", "title": "Eating places for every 100,000 people", "format": ",.0f"},
+          {"field": "establishments", "title": "Eating places", "format": ","}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"lon": 101.688, "lat": 3.153, "lon2": 99.5, "lat2": 1.9, "steps": [1, 4, 5]},
+          {"lon": 117.045, "lat": 5.259, "lon2": 117.9, "lat2": 1.9, "steps": [1, 5]},
+          {"lon": 101.478, "lat": 3.392, "lon2": 99.5, "lat2": 4.9, "steps": [2]},
+          {"lon": 113.51, "lat": 2.379, "lon2": 113.2, "lat2": 1.0, "steps": [3]},
+          {"lon": 101.478, "lat": 3.392, "lon2": 99.5, "lat2": 5.3, "steps": [4, 5]}
+        ]
+      },
+      "mark": {"type": "rule", "color": "#111111", "strokeWidth": 0.8},
+      "encoding": {
+        "longitude": {"field": "lon"},
+        "latitude": {"field": "lat"},
+        "longitude2": {"field": "lon2"},
+        "latitude2": {"field": "lat2"},
+        "opacity": {
+          "condition": {"test": "indexof(datum.steps, step) >= 0", "value": 1},
+          "value": 0
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"lon2": 99.5, "lat2": 1.9, "lines": ["Kuala Lumpur", "706 eating places for", "every 100,000 people"], "steps": [1, 4, 5]},
+          {"lon2": 117.9, "lat2": 1.9, "lines": ["Sabah", "231 for every 100,000"], "steps": [1, 5]},
+          {"lon2": 99.5, "lat2": 4.9, "lines": ["Selangor, Kuala Lumpur", "and Putrajaya:", "28.4% of eating places,", "27.9% of people"], "steps": [2]},
+          {"lon2": 99.5, "lat2": 5.3, "lines": ["Selangor", "24,625 eating places,", "the most of any state,", "but 349 for every 100,000"], "steps": [4, 5]}
+        ]
+      },
+      "mark": {"type": "text", "align": "right", "dx": -6, "fontSize": 14, "lineHeight": 18, "baseline": "middle"},
+      "encoding": {
+        "longitude": {"field": "lon2"},
+        "latitude": {"field": "lat2"},
+        "text": {"field": "lines"},
+        "opacity": {
+          "condition": {"test": "indexof(datum.steps, step) >= 0", "value": 1},
+          "value": 0
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"lon2": 113.2, "lat2": 1.0, "lines": ["Sabah, Sarawak and Labuan:", "18.3% of Malaysians,", "13.8% of eating places"], "steps": [3]}
+        ]
+      },
+      "mark": {"type": "text", "align": "left", "dx": 6, "fontSize": 14, "lineHeight": 18, "baseline": "middle"},
+      "encoding": {
+        "longitude": {"field": "lon2"},
+        "latitude": {"field": "lat2"},
+        "text": {"field": "lines"},
+        "opacity": {
+          "condition": {"test": "indexof(datum.steps, step) >= 0", "value": 1},
+          "value": 0
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "'Bricolage Grotesque', Arial, sans-serif",
+    "background": "#ffffff",
+    "view": {"stroke": null},
+    "title": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 22,
+      "fontWeight": 700,
+      "color": "#111111",
+      "anchor": "start",
+      "offset": 14,
+      "subtitleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "subtitleFontSize": 15,
+      "subtitleColor": "#666666",
+      "subtitlePadding": 6
+    },
+    "axis": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#555555",
+      "labelPadding": 6,
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "domainColor": "#999999",
+      "tickColor": "#999999",
+      "gridColor": "#ebebeb"
+    },
+    "legend": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#333333",
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "titlePadding": 6
+    },
+    "text": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 14,
+      "color": "#111111"
+    },
+    "rule": {"color": "#111111"}
+  }
+}

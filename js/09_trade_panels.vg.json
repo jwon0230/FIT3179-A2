@@ -1,0 +1,232 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": ["Eating places fell after 2015", "while the money and the jobs rose"],
+    "subtitle": [
+      "Malaysia's eating places in the census years 2010, 2015 and 2022",
+      "Each panel has its own scale, so read the lengths within a panel"
+    ]
+  },
+  "spacing": 22,
+  "data": {
+    "url": "data/census_national.csv",
+    "format": {
+      "parse": {
+        "establishments": "number",
+        "persons_engaged": "number",
+        "gross_output_rm_mil": "number"
+      }
+    }
+  },
+  "vconcat": [
+    {
+      "width": 456,
+      "height": {"step": 30},
+      "transform": [
+        {"calculate": "format(datum.establishments, ',')", "as": "label"},
+        {"calculate": "0", "as": "zero"}
+      ],
+      "encoding": {
+        "y": {
+          "field": "year",
+          "type": "ordinal",
+          "sort": "ascending",
+          "title": null,
+          "axis": {"labelPadding": 8, "ticks": false, "domain": true}
+        },
+        "x": {
+          "field": "establishments",
+          "type": "quantitative",
+          "title": "Eating places",
+          "scale": {"domain": [0, 215000]},
+          "axis": {
+            "orient": "top",
+            "labels": false,
+            "ticks": false,
+            "grid": false,
+            "domain": false,
+            "titleAnchor": "start",
+            "titlePadding": 8,
+            "titleFontSize": 15,
+            "titleFontWeight": 700,
+            "titleColor": "#111111"
+          }
+        }
+      },
+      "layer": [
+        {
+          "mark": {"type": "bar", "height": {"band": 0.62}},
+          "encoding": {
+            "color": {
+              "condition": {"test": "datum.year == '2022'", "value": "#2e6b3f"},
+              "value": "#2b8cbe"
+            },
+            "tooltip": [
+              {"field": "year", "title": "Census year"},
+              {"field": "establishments", "title": "Eating places", "format": ","}
+            ]
+          }
+        },
+        {
+          "mark": {"type": "text", "align": "left", "dx": 6, "fontSize": 13, "fontWeight": 600, "color": "#333333"},
+          "encoding": {"text": {"field": "label"}}
+        },
+        {
+          "transform": [{"filter": "datum.year == '2022'"}],
+          "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 13, "color": "#ffffff"},
+          "encoding": {
+            "x": {"field": "zero", "type": "quantitative"},
+            "text": {"value": "31,037 fewer than in 2015"},
+            "tooltip": [
+              {"field": "year", "title": "Census year"},
+              {"field": "establishments", "title": "Eating places", "format": ","}
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": 456,
+      "height": {"step": 30},
+      "transform": [{"calculate": "format(datum.persons_engaged, ',')", "as": "label"}],
+      "encoding": {
+        "y": {
+          "field": "year",
+          "type": "ordinal",
+          "sort": "ascending",
+          "title": null,
+          "axis": {"labelPadding": 8, "ticks": false, "domain": true}
+        },
+        "x": {
+          "field": "persons_engaged",
+          "type": "quantitative",
+          "title": "People working",
+          "scale": {"domain": [0, 1450000]},
+          "axis": {
+            "orient": "top",
+            "labels": false,
+            "ticks": false,
+            "grid": false,
+            "domain": false,
+            "titleAnchor": "start",
+            "titlePadding": 8,
+            "titleFontSize": 15,
+            "titleFontWeight": 700,
+            "titleColor": "#111111"
+          }
+        }
+      },
+      "layer": [
+        {
+          "mark": {"type": "bar", "height": {"band": 0.62}, "color": "#2b8cbe"},
+          "encoding": {
+            "tooltip": [
+              {"field": "year", "title": "Census year"},
+              {"field": "persons_engaged", "title": "People working", "format": ","}
+            ]
+          }
+        },
+        {
+          "mark": {"type": "text", "align": "left", "dx": 6, "fontSize": 13, "fontWeight": 600, "color": "#333333"},
+          "encoding": {"text": {"field": "label"}}
+        }
+      ]
+    },
+    {
+      "width": 456,
+      "height": {"step": 30},
+      "transform": [
+        {"calculate": "datum.gross_output_rm_mil / 1000", "as": "rm_bn"},
+        {"calculate": "format(datum.gross_output_rm_mil / 1000, '.1f')", "as": "label"}
+      ],
+      "encoding": {
+        "y": {
+          "field": "year",
+          "type": "ordinal",
+          "sort": "ascending",
+          "title": null,
+          "axis": {"labelPadding": 8, "ticks": false, "domain": true}
+        },
+        "x": {
+          "field": "rm_bn",
+          "type": "quantitative",
+          "title": "Money taken, RM billion",
+          "scale": {"domain": [0, 125]},
+          "axis": {
+            "orient": "top",
+            "labels": false,
+            "ticks": false,
+            "grid": false,
+            "domain": false,
+            "titleAnchor": "start",
+            "titlePadding": 8,
+            "titleFontSize": 15,
+            "titleFontWeight": 700,
+            "titleColor": "#111111"
+          }
+        }
+      },
+      "layer": [
+        {
+          "mark": {"type": "bar", "height": {"band": 0.62}, "color": "#2b8cbe"},
+          "encoding": {
+            "tooltip": [
+              {"field": "year", "title": "Census year"},
+              {"field": "rm_bn", "title": "Money taken, RM billion", "format": ".1f"}
+            ]
+          }
+        },
+        {
+          "mark": {"type": "text", "align": "left", "dx": 6, "fontSize": 13, "fontWeight": 600, "color": "#333333"},
+          "encoding": {"text": {"field": "label"}}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "font": "'Bricolage Grotesque', Arial, sans-serif",
+    "background": "#ffffff",
+    "view": {"stroke": null},
+    "title": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 22,
+      "fontWeight": 700,
+      "color": "#111111",
+      "anchor": "start",
+      "offset": 14,
+      "subtitleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "subtitleFontSize": 15,
+      "subtitleColor": "#666666",
+      "subtitlePadding": 6
+    },
+    "axis": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#555555",
+      "labelPadding": 6,
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "domainColor": "#999999",
+      "tickColor": "#999999",
+      "gridColor": "#ebebeb"
+    },
+    "legend": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#333333",
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "titlePadding": 6
+    },
+    "text": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 14,
+      "color": "#111111"
+    },
+    "rule": {"color": "#111111"}
+  }
+}

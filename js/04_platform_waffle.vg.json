@@ -1,0 +1,211 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": ["Grab keeps about two-thirds as", "ShopeeFood gains on foodpanda"],
+    "subtitle": [
+      "Share of the money Malaysians spent on food delivery,",
+      "by platform, 2023 and 2024. One square is one per cent.",
+      "Ringgit at Bank Negara Malaysia's average rate for the year."
+    ]
+  },
+  "spacing": 26,
+  "vconcat": [
+    {
+      "title": {"text": "2023: Malaysians spent US$2.4 billion, about RM 11.0 billion", "fontSize": 15, "fontWeight": 600, "offset": 8},
+      "width": 495,
+      "height": 150,
+      "layer": [
+        {
+          "data": {
+            "url": "data/waffle_platforms.csv",
+            "format": {"parse": {"year": "number", "row": "number", "col": "number", "share_pct": "number"}}
+          },
+          "transform": [
+            {"filter": "datum.year === 2023"},
+            {"calculate": "datum.col + 0.88", "as": "col_end"},
+            {"calculate": "datum.row + 0.88", "as": "row_end"},
+            {"calculate": "datum.share_pct + '%'", "as": "share_text"}
+          ],
+          "mark": {"type": "rect"},
+          "encoding": {
+            "x": {"field": "col", "type": "quantitative", "scale": {"domain": [0, 33], "nice": false}, "axis": null},
+            "x2": {"field": "col_end"},
+            "y": {"field": "row", "type": "quantitative", "scale": {"domain": [0, 10], "nice": false, "reverse": true}, "axis": null},
+            "y2": {"field": "row_end"},
+            "color": {
+              "field": "platform",
+              "type": "nominal",
+              "scale": {"domain": ["Grab", "foodpanda", "ShopeeFood"], "range": ["#a6761d", "#e7298a", "#e6ab02"]},
+              "legend": null
+            },
+            "tooltip": [
+              {"field": "platform", "title": "Platform"},
+              {"field": "year", "title": "Year"},
+              {"field": "share_text", "title": "Share of the money spent"}
+            ]
+          }
+        },
+        {
+          "data": {
+            "url": "data/waffle_platforms.csv",
+            "format": {"parse": {"year": "number", "row": "number", "share_pct": "number"}}
+          },
+          "transform": [
+            {"filter": "datum.year === 2023"},
+            {
+              "aggregate": [{"op": "mean", "field": "row", "as": "mean_row"}, {"op": "max", "field": "share_pct", "as": "share"}],
+              "groupby": ["platform"]
+            },
+            {"calculate": "datum.mean_row + 0.44", "as": "label_row"},
+            {"calculate": "datum.platform + ' ' + datum.share + '%'", "as": "label"}
+          ],
+          "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 13},
+          "encoding": {
+            "x": {"datum": 10.5, "type": "quantitative"},
+            "y": {"field": "label_row", "type": "quantitative"},
+            "text": {"field": "label"}
+          }
+        }
+      ]
+    },
+    {
+      "title": {"text": "2024: Malaysians spent US$2.6 billion, about RM 11.9 billion", "fontSize": 15, "fontWeight": 600, "offset": 8},
+      "width": 495,
+      "height": 150,
+      "layer": [
+        {
+          "data": {
+            "url": "data/waffle_platforms.csv",
+            "format": {"parse": {"year": "number", "row": "number", "col": "number", "share_pct": "number"}}
+          },
+          "transform": [
+            {"filter": "datum.year === 2024"},
+            {"calculate": "datum.col + 0.88", "as": "col_end"},
+            {"calculate": "datum.row + 0.88", "as": "row_end"},
+            {"calculate": "datum.share_pct + '%'", "as": "share_text"}
+          ],
+          "mark": {"type": "rect"},
+          "encoding": {
+            "x": {"field": "col", "type": "quantitative", "scale": {"domain": [0, 33], "nice": false}, "axis": null},
+            "x2": {"field": "col_end"},
+            "y": {"field": "row", "type": "quantitative", "scale": {"domain": [0, 10], "nice": false, "reverse": true}, "axis": null},
+            "y2": {"field": "row_end"},
+            "color": {
+              "field": "platform",
+              "type": "nominal",
+              "scale": {"domain": ["Grab", "foodpanda", "ShopeeFood"], "range": ["#a6761d", "#e7298a", "#e6ab02"]},
+              "legend": null
+            },
+            "tooltip": [
+              {"field": "platform", "title": "Platform"},
+              {"field": "year", "title": "Year"},
+              {"field": "share_text", "title": "Share of the money spent"}
+            ]
+          }
+        },
+        {
+          "data": {
+            "url": "data/waffle_platforms.csv",
+            "format": {"parse": {"year": "number", "row": "number", "share_pct": "number"}}
+          },
+          "transform": [
+            {
+              "aggregate": [{"op": "mean", "field": "row", "as": "mean_row"}, {"op": "max", "field": "share_pct", "as": "share"}],
+              "groupby": ["year", "platform"]
+            },
+            {
+              "window": [{"op": "lag", "field": "share", "as": "share_2023"}],
+              "groupby": ["platform"],
+              "sort": [{"field": "year", "order": "ascending"}]
+            },
+            {"filter": "datum.year === 2024 && datum.platform !== 'ShopeeFood'"},
+            {"calculate": "datum.mean_row + 0.44", "as": "label_row"},
+            {
+              "calculate": "datum.platform + ' ' + datum.share + '%, ' + (datum.share > datum.share_2023 ? 'up' : 'down') + ' from ' + datum.share_2023 + '%'",
+              "as": "label"
+            }
+          ],
+          "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 13},
+          "encoding": {
+            "x": {"datum": 10.5, "type": "quantitative"},
+            "y": {"field": "label_row", "type": "quantitative"},
+            "text": {"field": "label"}
+          }
+        },
+        {
+          "data": {
+            "url": "data/waffle_platforms.csv",
+            "format": {"parse": {"year": "number", "row": "number", "share_pct": "number"}}
+          },
+          "transform": [
+            {"filter": "datum.platform === 'ShopeeFood'"},
+            {
+              "aggregate": [{"op": "mean", "field": "row", "as": "mean_row"}, {"op": "max", "field": "share_pct", "as": "share"}],
+              "groupby": ["year", "platform"]
+            },
+            {
+              "window": [{"op": "lag", "field": "share", "as": "share_2023"}],
+              "sort": [{"field": "year", "order": "ascending"}]
+            },
+            {"filter": "datum.year === 2024"},
+            {"calculate": "datum.mean_row + 0.44", "as": "label_row"},
+            {"calculate": "datum.platform + ' ' + datum.share + '%, up from ' + datum.share_2023 + '%'", "as": "label"}
+          ],
+          "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 13, "fontWeight": 700, "color": "#2e6b3f"},
+          "encoding": {
+            "x": {"datum": 10.5, "type": "quantitative"},
+            "y": {"field": "label_row", "type": "quantitative"},
+            "text": {"field": "label"}
+          }
+        }
+      ]
+    }
+  ],
+  "resolve": {"scale": {"color": "independent"}},
+  "config": {
+    "font": "'Bricolage Grotesque', Arial, sans-serif",
+    "background": "#ffffff",
+    "view": {"stroke": null},
+    "title": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 22,
+      "fontWeight": 700,
+      "color": "#111111",
+      "anchor": "start",
+      "offset": 14,
+      "subtitleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "subtitleFontSize": 15,
+      "subtitleColor": "#666666",
+      "subtitlePadding": 6
+    },
+    "axis": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#555555",
+      "labelPadding": 6,
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "domainColor": "#999999",
+      "tickColor": "#999999",
+      "gridColor": "#ebebeb"
+    },
+    "legend": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#333333",
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "titlePadding": 6
+    },
+    "text": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 14,
+      "color": "#111111"
+    },
+    "rule": {"color": "#111111"}
+  }
+}

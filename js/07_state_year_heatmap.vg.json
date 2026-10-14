@@ -1,0 +1,227 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "Eating out and hotels rose most in Putrajaya, with 18.4% in 2022 alone",
+    "subtitle": [
+      "Cells: the change in the price of eating out and hotels over each year, by state, 2011 to 2025",
+      "Bars: the change in the same prices from January 2019 to August 2026"
+    ],
+    "anchor": "start"
+  },
+  "spacing": 24,
+  "hconcat": [
+    {
+      "width": 681,
+      "height": 384,
+      "data": {
+        "url": "data/cpi_state_year_inflation.csv",
+        "format": {"parse": {"index": "number", "inflation_pct": "number"}}
+      },
+      "transform": [
+        {
+          "calculate": "datum.inflation_pct < 0 ? 'Prices fell' : datum.inflation_pct < 2 ? '0 to 2%' : datum.inflation_pct < 4 ? '2 to 4%' : datum.inflation_pct < 6 ? '4 to 6%' : '6% or more'",
+          "as": "band"
+        },
+        {"calculate": "format(datum.inflation_pct, '+.1f') + '%'", "as": "change_text"},
+        {"calculate": "format(datum.index, '.1f')", "as": "index_text"}
+      ],
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "sort": "ascending",
+          "title": "Year",
+          "axis": {"labelAngle": 0, "titlePadding": 10}
+        },
+        "y": {
+          "field": "state",
+          "type": "ordinal",
+          "title": "State",
+          "sort": [
+            "Putrajaya",
+            "Selangor",
+            "Sabah",
+            "Sarawak",
+            "Pulau Pinang",
+            "Johor",
+            "Labuan",
+            "Perlis",
+            "Terengganu",
+            "Kuala Lumpur",
+            "Perak",
+            "Pahang",
+            "Kedah",
+            "Negeri Sembilan",
+            "Melaka",
+            "Kelantan"
+          ],
+          "axis": {"labelLimit": 200, "titlePadding": 10}
+        }
+      },
+      "layer": [
+        {
+          "mark": {"type": "rect", "stroke": "#ffffff", "strokeWidth": 1},
+          "encoding": {
+            "color": {
+              "field": "band",
+              "type": "ordinal",
+              "title": "Change in the price of eating out and hotels over the year",
+              "scale": {
+                "domain": ["Prices fell", "0 to 2%", "2 to 4%", "4 to 6%", "6% or more"],
+                "range": ["#f1eef6", "#bdc9e1", "#74a9cf", "#2b8cbe", "#045a8d"]
+              },
+              "legend": {
+                "orient": "top",
+                "direction": "horizontal",
+                "columns": 5,
+                "columnPadding": 16,
+                "titleOrient": "top",
+                "titleAnchor": "start",
+                "titleLimit": 420,
+                "symbolType": "square",
+                "symbolSize": 180,
+                "symbolStrokeWidth": 0,
+                "offset": 12
+              }
+            },
+            "tooltip": [
+              {"field": "state", "title": "State"},
+              {"field": "year", "title": "Year"},
+              {"field": "change_text", "title": "Change over the year"},
+              {"field": "index_text", "title": "Price index, 2010 = 100"}
+            ]
+          }
+        },
+        {
+          "transform": [{"filter": "datum.state == 'Putrajaya' && datum.year == '2022'"}],
+          "mark": {"type": "rect", "filled": false, "stroke": "#2e6b3f", "strokeWidth": 2.2},
+          "encoding": {}
+        },
+        {
+          "transform": [{"filter": "datum.state == 'Putrajaya' && datum.year == '2022'"}],
+          "mark": {"type": "text", "fontSize": 12, "fontWeight": 700, "color": "#ffffff"},
+          "encoding": {"text": {"field": "change_text"}}
+        }
+      ]
+    },
+    {
+      "width": 180,
+      "height": 384,
+      "data": {
+        "url": "data/cpi_state_change.csv",
+        "format": {"parse": {"index_jan2019": "number", "index_aug2026": "number", "change_pct": "number"}}
+      },
+      "transform": [
+        {"calculate": "format(datum.change_pct, '.1f') + '%'", "as": "change_text"},
+        {"calculate": "format(datum.index_jan2019, '.1f')", "as": "start_text"},
+        {"calculate": "format(datum.index_aug2026, '.1f')", "as": "end_text"}
+      ],
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "ordinal",
+          "title": null,
+          "sort": [
+            "Putrajaya",
+            "Selangor",
+            "Sabah",
+            "Sarawak",
+            "Pulau Pinang",
+            "Johor",
+            "Labuan",
+            "Perlis",
+            "Terengganu",
+            "Kuala Lumpur",
+            "Perak",
+            "Pahang",
+            "Kedah",
+            "Negeri Sembilan",
+            "Melaka",
+            "Kelantan"
+          ],
+          "axis": null
+        },
+        "x": {
+          "field": "change_pct",
+          "type": "quantitative",
+          "title": "Since January 2019 (%)",
+          "scale": {"domain": [0, 46]},
+          "axis": {"values": [0, 10, 20, 30], "format": ".0f", "grid": true, "domain": false, "titlePadding": 10}
+        }
+      },
+      "layer": [
+        {
+          "mark": {"type": "bar", "height": {"band": 0.72}},
+          "encoding": {
+            "color": {
+              "condition": {"test": "datum.state == 'Putrajaya'", "value": "#2e6b3f"},
+              "value": "#2b8cbe"
+            },
+            "tooltip": [
+              {"field": "state", "title": "State"},
+              {"field": "change_text", "title": "Change since January 2019"},
+              {"field": "start_text", "title": "Price index in January 2019"},
+              {"field": "end_text", "title": "Price index in August 2026"}
+            ]
+          }
+        },
+        {
+          "transform": [{"filter": "datum.state == 'Putrajaya'"}],
+          "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 5, "fontSize": 13, "fontWeight": 700, "color": "#2e6b3f"},
+          "encoding": {"text": {"field": "change_text"}}
+        },
+        {
+          "transform": [{"filter": "datum.state == 'Kelantan'"}],
+          "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 5, "fontSize": 13, "color": "#111111"},
+          "encoding": {"text": {"field": "change_text"}}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "font": "'Bricolage Grotesque', Arial, sans-serif",
+    "background": "#ffffff",
+    "view": {"stroke": null},
+    "title": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 22,
+      "fontWeight": 700,
+      "color": "#111111",
+      "anchor": "start",
+      "offset": 14,
+      "subtitleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "subtitleFontSize": 15,
+      "subtitleColor": "#666666",
+      "subtitlePadding": 6
+    },
+    "axis": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#555555",
+      "labelPadding": 6,
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "domainColor": "#999999",
+      "tickColor": "#999999",
+      "gridColor": "#ebebeb"
+    },
+    "legend": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#333333",
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "titlePadding": 6
+    },
+    "text": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 14,
+      "color": "#111111"
+    },
+    "rule": {"color": "#111111"}
+  }
+}

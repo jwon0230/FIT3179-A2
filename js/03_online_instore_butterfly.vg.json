@@ -1,0 +1,236 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": ["Food and health essentials are the one", "thing where the shop beats online"],
+    "subtitle": ["Of internet users who paid without cash in each channel,", "the share who bought each thing, Malaysia, 2024,", "for the eight things where both ways reach 10%"]
+  },
+  "spacing": 145,
+  "bounds": "flush",
+  "resolve": {"scale": {"x": "independent"}},
+  "data": {
+    "url": "data/mcmc_online_instore.csv",
+    "format": {"parse": {"share_pct": "number"}}
+  },
+  "transform": [
+    {
+      "filter": {
+        "field": "category",
+        "oneOf": [
+          "Clothing and accessories",
+          "Food and health essentials",
+          "Gadgets and computers",
+          "Government services",
+          "Travel bookings",
+          "Insurance and investments",
+          "Sports equipment",
+          "Books and publications"
+        ]
+      }
+    },
+    {
+      "calculate": "datum.category == 'Clothing and accessories' ? 'Clothing' : datum.category == 'Food and health essentials' ? 'Food and health' : datum.category == 'Gadgets and computers' ? 'Gadgets' : datum.category == 'Government services' ? 'Government services' : datum.category == 'Travel bookings' ? 'Travel' : datum.category == 'Insurance and investments' ? 'Insurance' : datum.category == 'Sports equipment' ? 'Sports' : 'Books'",
+      "as": "short"
+    },
+    {"calculate": "datum.channel == 'Online' ? 'Online' : 'In a shop'", "as": "where"},
+    {"calculate": "format(datum.share_pct, '.1f') + '%'", "as": "share_text"}
+  ],
+  "hconcat": [
+    {
+      "width": 173.5,
+      "height": 318,
+      "transform": [{"filter": "datum.channel == 'Online'"}],
+      "layer": [
+        {
+          "mark": {"type": "bar", "height": {"band": 0.72}},
+          "encoding": {
+            "x": {
+              "field": "share_pct",
+              "type": "quantitative",
+              "scale": {"domain": [0, 100], "reverse": true},
+              "axis": {
+                "title": "Bought online",
+                "titleColor": "#7570b3",
+                "values": [0, 50, 100],
+                "labelExpr": "datum.value + '%'",
+                "grid": true
+              }
+            },
+            "y": {
+              "field": "short",
+              "type": "nominal",
+              "sort": ["Clothing", "Food and health", "Gadgets", "Government services", "Travel", "Insurance", "Sports", "Books"],
+              "axis": {
+                "orient": "right",
+                "title": null,
+                "domain": false,
+                "ticks": false,
+                "labelAlign": "center",
+                "labelPadding": 72.5,
+                "labelLimit": 160,
+                "labelColor": {"expr": "datum.label === 'Food and health' ? '#2e6b3f' : '#333333'"},
+                "labelFontWeight": {"expr": "datum.label === 'Food and health' ? 700 : 400"}
+              }
+            },
+            "color": {
+              "field": "where",
+              "type": "nominal",
+              "scale": {"domain": ["Online", "In a shop"], "range": ["#7570b3", "#d95f02"]},
+              "legend": null
+            },
+            "stroke": {
+              "condition": {"test": "datum.short === 'Food and health'", "value": "#2e6b3f"},
+              "value": null
+            },
+            "strokeWidth": {
+              "condition": {"test": "datum.short === 'Food and health'", "value": 1.6},
+              "value": 0
+            },
+            "tooltip": [
+              {"field": "category", "title": "What they bought"},
+              {"field": "where", "title": "Bought"},
+              {"field": "share_text", "title": "Share of those who paid without cash this way"}
+            ]
+          }
+        },
+        {
+          "transform": [{"filter": {"field": "short", "oneOf": ["Food and health"]}}],
+          "mark": {"type": "text", "align": "left", "dx": 5, "fontSize": 13, "fontWeight": 600, "color": "#ffffff"},
+          "encoding": {
+            "x": {"field": "share_pct", "type": "quantitative"},
+            "y": {
+              "field": "short",
+              "type": "nominal",
+              "sort": ["Clothing", "Food and health", "Gadgets", "Government services", "Travel", "Insurance", "Sports", "Books"]
+            },
+            "text": {"field": "share_text"}
+          }
+        }
+      ]
+    },
+    {
+      "width": 173.5,
+      "height": 318,
+      "transform": [{"filter": "datum.channel == 'Physical store'"}],
+      "layer": [
+        {
+          "mark": {"type": "bar", "height": {"band": 0.72}},
+          "encoding": {
+            "x": {
+              "field": "share_pct",
+              "type": "quantitative",
+              "scale": {"domain": [0, 100]},
+              "axis": {
+                "title": "Bought in a shop",
+                "titleColor": "#d95f02",
+                "values": [0, 50, 100],
+                "labelExpr": "datum.value + '%'",
+                "grid": true
+              }
+            },
+            "y": {
+              "field": "short",
+              "type": "nominal",
+              "sort": ["Clothing", "Food and health", "Gadgets", "Government services", "Travel", "Insurance", "Sports", "Books"],
+              "axis": null
+            },
+            "color": {
+              "field": "where",
+              "type": "nominal",
+              "scale": {"domain": ["Online", "In a shop"], "range": ["#7570b3", "#d95f02"]},
+              "legend": null
+            },
+            "stroke": {
+              "condition": {"test": "datum.short === 'Food and health'", "value": "#2e6b3f"},
+              "value": null
+            },
+            "strokeWidth": {
+              "condition": {"test": "datum.short === 'Food and health'", "value": 1.6},
+              "value": 0
+            },
+            "tooltip": [
+              {"field": "category", "title": "What they bought"},
+              {"field": "where", "title": "Bought"},
+              {"field": "share_text", "title": "Share of those who paid without cash this way"}
+            ]
+          }
+        },
+        {
+          "transform": [{"filter": {"field": "short", "oneOf": ["Food and health"]}}],
+          "mark": {"type": "text", "align": "right", "dx": -5, "fontSize": 13, "fontWeight": 600, "color": "#ffffff"},
+          "encoding": {
+            "x": {"field": "share_pct", "type": "quantitative"},
+            "y": {
+              "field": "short",
+              "type": "nominal",
+              "sort": ["Clothing", "Food and health", "Gadgets", "Government services", "Travel", "Insurance", "Sports", "Books"]
+            },
+            "text": {"field": "share_text"}
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {"short": "Insurance", "x": 30, "lines": ["Food and health is", "the one thing where", "the shop wins,", "90.1% to 73.4%"]}
+            ]
+          },
+          "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 13, "lineHeight": 17, "color": "#111111"},
+          "encoding": {
+            "x": {"field": "x", "type": "quantitative"},
+            "y": {
+              "field": "short",
+              "type": "nominal",
+              "sort": ["Clothing", "Food and health", "Gadgets", "Government services", "Travel", "Insurance", "Sports", "Books"]
+            },
+            "text": {"field": "lines"}
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "font": "'Bricolage Grotesque', Arial, sans-serif",
+    "background": "#ffffff",
+    "view": {"stroke": null},
+    "title": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 22,
+      "fontWeight": 700,
+      "color": "#111111",
+      "anchor": "start",
+      "offset": 14,
+      "subtitleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "subtitleFontSize": 15,
+      "subtitleColor": "#666666",
+      "subtitlePadding": 6
+    },
+    "axis": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#555555",
+      "labelPadding": 6,
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "domainColor": "#999999",
+      "tickColor": "#999999",
+      "gridColor": "#ebebeb"
+    },
+    "legend": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#333333",
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "titlePadding": 6
+    },
+    "text": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 14,
+      "color": "#111111"
+    },
+    "rule": {"color": "#111111"}
+  }
+}

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Malaysia orders in</title>
+<script src="https://cdn.jsdelivr.net/npm/vega@6.4.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.3"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@7.3.0"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,800&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@900&text=%E5%A4%A7%E9%A6%AC%E5%8F%AB%E5%A4%96%E8%B3%A3&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="sign">
+    <div class="sign-panel">
+      <p class="sign-zh" lang="zh-Hant">大馬叫外賣</p>
+      <h1>Malaysia orders in</h1>
+      <p class="sign-price">RM 11.9 billion<span>spent on food delivery in 2024</span></p>
+    </div>
+  </div>
+  <div class="col">
+    <p class="dek">Food delivery took off in the years Malaysia's eating places were closing. Where we eat out, what a meal costs and what we order have all moved since.</p>
+    <p class="byline">By Justin Wong, published October 2026</p>
+  </div>
+</header>
+
+<div class="col">
+  <p>Malaysia's food and drink businesses earned RM 9,742 million from online sales in 2023, 10.8% more than in 2021 (Department of Statistics Malaysia, DOSM). No Malaysian agency counts the delivery orders themselves.</p>
+  <p>We follow the change through five things that are counted: where the eating places are, what Malaysians spend on delivery, what a meal out costs, the money and jobs in the trade, and the food on offer. Eating places here are the restaurants, food stalls, cafes, drink stalls and caterers that DOSM counts in its Economic Census.</p>
+</div>
+
+<section>
+  <div class="col opener">
+    <h2>Kuala Lumpur has three times Sabah's eating places, per person</h2>
+    <p class="dek">The Klang Valley has its fair share of eating places, and Sabah falls short.</p>
+    <p>Malaysia had 136,453 eating places in 2022, about one for every 240 people. Kuala Lumpur has 706 for every 100,000 people and Putrajaya 210, so the two federal cities rank first and last among the sixteen states and federal territories.</p>
+  </div>
+
+  <div class="scrolly">
+    <div class="stage"><div id="vis01" class="chart"></div></div>
+    <div class="steps">
+      <div class="step" data-step="1"><div class="card"><p>Darker states have more eating places for their people. Kuala Lumpur leads with 706 for every 100,000, and Sabah has 231.</p><p class="note">Keep scrolling to move through the map.</p></div></div>
+      <div class="step" data-step="2"><div class="card"><p>Selangor, Kuala Lumpur and Putrajaya, the Klang Valley, hold 38,720 of Malaysia's 136,453 eating places. That is 28.4%, close to their 27.9% share of the people.</p></div></div>
+      <div class="step" data-step="3"><div class="card"><p>Across the South China Sea the balance tips the other way. Sabah, Sarawak and Labuan hold 18.3% of Malaysians and only 13.8% of the eating places.</p></div></div>
+      <div class="step" data-step="4"><div class="card"><p>Selangor has more eating places than any other state, 24,625. Spread over 7.1 million people, that is 349 for every 100,000, thirteenth of sixteen.</p></div></div>
+    </div>
+  </div>
+
+  <div class="col">
+    <p class="credit">Source: Department of Statistics Malaysia, Economic Census 2023 and population for 2022. Boundaries from geoBoundaries.</p>
+  </div>
+
+  <div class="col">
+    <p>OpenStreetMap, a free world map that volunteers edit, records where each outlet stands. It holds 26,744 Malaysian restaurants, cafes and fast-food outlets, about one in five of the census count.</p>
+  </div>
+
+  <figure>
+    <div id="vis02" class="chart"></div>
+    <p class="note">Choose a kind of outlet from the menu.</p>
+    <figcaption>Source: OpenStreetMap contributors, snapshot 11 October 2026.</figcaption>
+  </figure>
+
+  <div class="col">
+    <p>The dots merge into one patch over the Klang Valley, where Selangor and Kuala Lumpur hold 36.7% of the mapped eating places. A thinner line follows the west coast south to Johor. Sabah and Sarawak are mostly blank, with dots where the towns are and little between them.</p>
+  </div>
+</section>
+
+<section>
+  <div class="col opener">
+    <h2>Malaysians spent more on food delivery in 2024</h2>
+    <p class="dek">Food is near the top of what Malaysians buy online, and Grab takes two-thirds of delivery spending.</p>
+    <p>In 2024, 81.0% of Malaysia's internet users bought something online, according to the Malaysian Communications and Multimedia Commission (MCMC). Food and health essentials came second only to clothing. Three apps carry the meals ordered to the door, so an eating place can now reach customers who never walk in.</p>
+  </div>
+
+  <figure>
+    <div class="row">
+      <div id="vis03" class="chart"></div>
+      <div id="vis04" class="chart"></div>
+    </div>
+    <figcaption>Sources: Malaysian Communications and Multimedia Commission, Internet Users Survey 2024 (left); Momentum Works, January 2024 and February 2025 (right).</figcaption>
+  </figure>
+
+  <div class="col">
+    <p>Each side of the chart counts its own group of shoppers. The left counts internet users who paid without cash online, and the right those who paid without cash in a shop. Of the shop group, 90.1% bought <span class="key">food and health essentials</span>, against 73.4% of the online group. For the other seven things on the chart, the online share is the higher one.</p>
+    <p>Grab took 66% of the money Malaysians spent on food delivery in 2024, up from 65% the year before. <span class="key">ShopeeFood</span> rose from 5% to 9%, and foodpanda fell from 30% to 25%. Spending grew from US$2.4 billion to US$2.6 billion, or about RM 11.0 billion to RM 11.9 billion, so foodpanda took less money in a bigger market. The latest regional count, for 2025, has Southeast Asia's delivery spending up 18% to US$22.7 billion, about RM 97.2 billion.</p>
+  </div>
+</section>
+
+<section>
+  <div class="col opener">
+    <h2>A meal out costs more than it did</h2>
+    <p class="dek">The rise has been steepest in the towns and in Putrajaya.</p>
+    <p>Since January 2015 the price of a meal out has risen 42.9%, against 26.0% for food cooked at home. A meal out here means food or drink bought ready to eat from a restaurant, stall or cafe. Delivery apps sell meals from those same kitchens, though DOSM keeps no separate price for the delivered ones.</p>
+  </div>
+
+  <figure>
+    <div id="vis05" class="chart"></div>
+    <figcaption>Source: Department of Statistics Malaysia, Consumer Price Index.</figcaption>
+  </figure>
+
+  <div class="col">
+    <p>Every line starts at 100 in January 2015, so 142.9 means prices have risen 42.9%. Everything Malaysians buy rose 24.3% over the same years, so food cooked at home kept close to prices overall. The price of <span class="key">a meal out</span> rose less than 1% in the year after the Movement Control Order (MCO) stopped dining in on 18 March 2020. The two food lines moved together until 2022, and the gap between them has widened every year since.</p>
+  </div>
+
+  <figure>
+    <div id="vis06" class="chart"></div>
+    <figcaption>Source: Department of Statistics Malaysia, Consumer Price Index by strata and division.</figcaption>
+  </figure>
+
+  <div class="col">
+    <p>DOSM prices towns and the country separately, and it counts eating out together with hotel stays in one spending group, <span class="key">eating out and hotels</span>. That group rose 24.0% in towns between January 2019 and August 2026 against 15.9% in the country. Food and drink has the second widest gap, so both groups that cover food sit at the top. Phone and internet is the only group that got cheaper in both, down 5.3% in towns and 1.4% in the country.</p>
+  </div>
+
+  <figure>
+    <div id="vis07" class="chart"></div>
+    <figcaption>Source: Department of Statistics Malaysia, Consumer Price Index by state.</figcaption>
+  </figure>
+
+  <div class="col">
+    <p>Eating out and hotels cost 36.7% more in <span class="key">Putrajaya</span> in August 2026 than in January 2019, the most of the sixteen states, and 13.5% more in Kelantan, the least. Putrajaya's prices rose 18.4% in 2022 alone, the biggest one-year rise for any state from 2011 to 2025. Ten of the sixteen states had their fastest year in 2022 or 2023.</p>
+  </div>
+</section>
+
+<section>
+  <div class="col opener">
+    <h2>Fewer kitchens, more money</h2>
+    <p class="dek">Employment grew as the count fell, and the Klang Valley holds two in five jobs.</p>
+    <p>The Economic Census gives three counts of the trade, for 2010, 2015 and 2022. Between the last two the number of eating places fell by nearly one in five, so what Malaysians pay for meals, at the counter or through an app, now goes to fewer kitchens. The money the eating places took, the value of everything they sold, rose by half, and the number of people working in them by a fifth.</p>
+  </div>
+
+  <figure>
+    <div id="vis08" class="chart"></div>
+    <figcaption>Source: Department of Statistics Malaysia, Economic Census 2023.</figcaption>
+  </figure>
+
+  <div class="col">
+    <p>Malaysia's eating places employed 1,079,843 people in 2022, and 292,295 of them worked in <span class="key">Selangor</span>. Kuala Lumpur adds 153,179 and Putrajaya 5,459, so the Klang Valley holds two in five of the jobs. Sabah has 3.4 million residents and 56,284 people working in its eating places, fewer than Pulau Pinang's 73,319 on half the population.</p>
+  </div>
+
+  <figure>
+    <div class="row">
+      <div id="vis09" class="chart"></div>
+      <div id="vis10" class="chart"></div>
+    </div>
+    <figcaption>Source: Department of Statistics Malaysia, Economic Census 2023.</figcaption>
+  </figure>
+
+  <div class="col">
+    <p>Malaysia counted 167,490 eating places in 2015 and <span class="key">136,453 in 2022</span>, 31,037 fewer. Over the same seven years the money they took rose from RM 66.4 billion to RM 99.0 billion, and the people working in them from 891,616 to 1,079,843. The count is still 5,883 above 2010, so the fall erased most of the gain made between 2010 and 2015. Businesses in the trade reported RM 8,932 million of online sales to DOSM for 2022, about 9% of the trade's RM 99.0 billion.</p>
+    <p><span class="key">Food services</span>, the restaurants and food stalls, took RM 401,000 for every eating place in 2015 and RM 773,000 in 2022, 1.9 times as much before allowing for higher prices. Beverage services, the cafes and drink stalls, went from RM 397,000 to RM 716,000, while event catering barely moved, from RM 357,000 to RM 415,000. A meal out cost 18.0% more in 2022 than in 2015, so at 2015 prices food services still took about 1.6 times as much.</p>
+  </div>
+</section>
+
+<section>
+  <div class="col opener">
+    <h2>Western and fast food leads the menu in most states</h2>
+    <p class="dek">Kedah, Pahang, Negeri Sembilan and Sarawak are the exceptions.</p>
+    <p>A delivery app can only offer what nearby kitchens cook. OpenStreetMap lets volunteers record the cuisine each outlet serves, and 13,160 of the 26,744 mapped outlets name one. We sort them into ten kinds of food, from Malaysian and Chinese to coffee and drinks.</p>
+  </div>
+
+  <figure>
+    <div id="vis11" class="chart"></div>
+    <figcaption>Source: OpenStreetMap contributors, snapshot 11 October 2026.</figcaption>
+  </figure>
+
+  <div class="col">
+    <p><span class="key">Western and fast food</span>, Chinese food and Malaysian food make up 59.1% of the 13,160 outlets that name a cuisine. Japanese and Korean food, at 542 outlets, edges past Indian at 533.</p>
+  </div>
+
+  <figure>
+    <div id="vis12" class="chart"></div>
+    <figcaption>Source: OpenStreetMap contributors, snapshot 11 October 2026.</figcaption>
+  </figure>
+
+  <div class="col">
+    <p>Western and fast food is the biggest group in eight of the twelve states. Chinese food leads in Sarawak, at 29.5%, and Malaysian food in Kedah, Pahang and Negeri Sembilan. In <span class="key">Kedah</span> 44.4% of the outlets that name a cuisine serve Malaysian food, almost three times its share of Western and fast food. Negeri Sembilan's lead is only two outlets and Pulau Pinang's six, so both are close to a tie.</p>
+  </div>
+</section>
+
+<section>
+  <div class="col opener">
+    <h2>Malaysians pay more to eat from fewer kitchens</h2>
+    <p class="dek">Ordering in grew while the trade shrank to fewer, busier eating places.</p>
+    <p>The riders who carry Malaysia's orders now come under the Gig Workers Act 2025, in force since 31 March 2026. It covers about 1.64 million gig workers, people paid for each job they take.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="col">
+    <h3>About this page</h3>
+    <p>By Justin Wong, for FIT3179 Data Visualisation at Monash University Malaysia.</p>
+    <p>Published October 2026.</p>
+
+    <h3>Data</h3>
+    <ul>
+      <li>Department of Statistics Malaysia, Consumer Price Index by group, January 2010 to August 2026, <a href="https://storage.dosm.gov.my/cpi/cpi_3d.csv">cpi_3d</a>, retrieved 11 October 2026, CC BY 4.0.</li>
+      <li>Department of Statistics Malaysia, Consumer Price Index by division, January 1980 to August 2026, <a href="https://storage.dosm.gov.my/cpi/cpi_2d.csv">cpi_2d</a>, retrieved 11 October 2026, CC BY 4.0.</li>
+      <li>Department of Statistics Malaysia, Consumer Price Index by state and division, January 2010 to August 2026, <a href="https://storage.dosm.gov.my/cpi/cpi_2d_state.csv">cpi_2d_state</a>, retrieved 11 October 2026, CC BY 4.0.</li>
+      <li>Department of Statistics Malaysia, Consumer Price Index by strata and division, to August 2026, <a href="https://storage.dosm.gov.my/cpi/cpi_2d_strata.csv">cpi_2d_strata</a>, retrieved 11 October 2026, CC BY 4.0.</li>
+      <li>Department of Statistics Malaysia, Population Table: States, 1970 to 2026, <a href="https://storage.dosm.gov.my/population/population_state.csv">population_state</a>, retrieved 11 October 2026, CC BY 4.0.</li>
+      <li>Department of Statistics Malaysia, Economic Census 2023: Food and Beverage Services, reference year 2022, released 5 August 2024, <a href="https://www.dosm.gov.my/portal-main/release-content/economic-census-2023-food-and-beverage-services-sector">release</a> and <a href="https://www.dosm.gov.my/portal-main/release-document-log?release_document_id=10404">statistical tables</a>, retrieved 11 October 2026, CC BY 4.0.</li>
+      <li>Department of Statistics Malaysia, ICT Use and Access by Individuals and Households Survey Report 2025, table 4.3, food and beverages e-commerce income, 2021 to 2023, published 23 April 2026, <a href="https://www.dosm.gov.my/uploads/release-content/file_20260423113121.pdf">report</a>, retrieved 12 October 2026.</li>
+      <li>Malaysian Communications and Multimedia Commission, Internet Users Survey 2024, published 6 October 2025, <a href="https://www.mcmc.gov.my/skmmgovmy/media/General/pdf2/Internet-Users-Survey-2024-Report.pdf">report</a>, figure 20 and table 1, retrieved 11 October 2026.</li>
+      <li>OpenStreetMap contributors, restaurants, cafes and fast-food outlets in Malaysia, snapshot 11 October 2026, through the <a href="https://overpass-api.de/">Overpass API</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, <a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL 1.0</a>.</li>
+      <li>Momentum Works, food delivery spending and platform shares for Malaysia and Southeast Asia, public summaries of <a href="https://thelowdown.momentum.asia/southeast-asias-food-delivery-spend-reached-us17-1b-with-vietnam-achieving-the-highest-growth-momentum-works/">30 January 2024</a>, <a href="https://thelowdown.momentum.asia/press-release-southeast-asias-food-delivery-spend-reaches-us19-3b-with-vietnam-and-indonesia-leading-growth-momentum-works/">17 February 2025</a> and <a href="https://thelowdown.momentum.asia/new-report-southeast-asia-food-delivery-gmv-grew-18-to-hit-us22-7b-in-2025/">27 January 2026</a>, retrieved 11 and 12 October 2026.</li>
+      <li>Bank Negara Malaysia, <a href="https://www.bnm.gov.my/exchange-rates">exchange rates</a>, US dollar, noon middle rate, 2023 to 2025, through the <a href="https://apikijangportal.bnm.gov.my/">BNM Open API</a>, retrieved 12 October 2026.</li>
+    </ul>
+
+    <h3>Boundaries</h3>
+    <ul>
+      <li>State boundaries: <a href="https://www.geoboundaries.org/">geoBoundaries</a> gbOpen MYS ADM1, 2017 boundaries, Runfola et al., William &amp; Mary geoLab, from OpenStreetMap contributors, retrieved 11 October 2026, <a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL 1.0</a>, simplified with mapshaper.</li>
+    </ul>
+
+    <h3>Dates</h3>
+    <ul>
+      <li>Movement Control Order from 18 March 2020, with restaurants open for takeaway and delivery only: <a href="https://www.malaymail.com/news/malaysia/2020/03/17/nsc-restaurants-can-only-open-for-takeaways-deliveries-strictly-no-din/1847409">Malay Mail, 17 March 2020</a>, reporting the National Security Council, retrieved 12 October 2026.</li>
+      <li>Delivery Hero ends talks to sell foodpanda's Southeast Asian business, 21 February 2024: <a href="https://www.malaymail.com/news/money/2024/02/22/foodpanda-is-no-longer-for-sale-negotiations-have-been-terminated/119458">Malay Mail, 22 February 2024</a>, retrieved 12 October 2026.</li>
+      <li>Gig Workers Act 2025 in force 31 March 2026, covering about 1.64 million gig workers: <a href="https://bernama.com/en/news.php?id=2539439">Bernama, 31 March 2026</a>, retrieved 12 October 2026.</li>
+    </ul>
+
+    <h3>Credits</h3>
+    <ul>
+      <li>The plate, fork and spoon icon on the cuisine chart is put together from <a href="https://github.com/waysidemapping/pinhead">Pinhead</a> map icons by Quincy Morgan, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>.</li>
+      <li>Charts and maps made with Vega-Lite.</li>
+      <li>Type: Newsreader, Bricolage Grotesque and Noto Serif TC from Google Fonts, SIL Open Font License.</li>
+    </ul>
+
+    <h3>How the measures are worked out</h3>
+    <ul>
+      <li>Eating places for every 100,000 people: a state's 2022 count of eating places divided by its 2022 population, times 100,000.</li>
+      <li>Shares of eating places and people: a group of states' total divided by Malaysia's, 136,453 eating places and 32.7 million people in 2022.</li>
+      <li>Price index from January 2015: each month's index divided by its January 2015 value, times 100.</li>
+      <li>Price change since January 2019: the August 2026 index divided by the January 2019 index, minus one, as a percentage. The gap between town and country is the town change minus the country change.</li>
+      <li>Change over the year, by state: a year's average index against the year before's.</li>
+      <li>Money taken: the census's gross output, the value of everything eating places sold in the year. Money taken for every eating place is that value divided by the number of eating places.</li>
+      <li>At 2015 prices: the 2022 figure divided by 1.180, the rise in the yearly average price of a meal out from 2015 to 2022.</li>
+      <li>Delivery spending in ringgit: the US dollar figure times Bank Negara Malaysia's average noon middle rate for that year, RM 4.57 to the US dollar in 2023 and in 2024 and RM 4.28 in 2025.</li>
+      <li>Online sales against money taken: RM 8,932 million of online sales divided by the RM 98,959 million that eating places took in 2022.</li>
+      <li>Mapped outlets by state: each OpenStreetMap outlet placed in the state whose boundary holds it. Outlets that fall outside every boundary are left out.</li>
+      <li>Kinds of food: each outlet goes to one of ten groups, by the first of its cuisine tags that matches a group. Shares are of the outlets that name a cuisine.</li>
+      <li>One plate is 100 outlets, rounded to the nearest plate. One square on the delivery chart is one per cent of the money spent.</li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+var isStatic = matchMedia('(prefers-reduced-motion: reduce)').matches || location.search.indexOf('static') >= 0;
+if (isStatic) {
+  document.documentElement.classList.add('static');
+}
+
+var opts = {"actions": false, "renderer": "svg"};
+
+var stageView;
+function embedAll() {
+  vegaEmbed('#vis01', 'js/01_eating_places_choropleth.vg.json', opts).then(function (result) {
+    stageView = result.view;
+    if (isStatic) {
+      stageView.signal('step', 5).runAsync();
+    }
+  }).catch(console.error);
+
+  vegaEmbed('#vis02', 'js/02_outlet_dot_map.vg.json', opts).catch(console.error);
+  vegaEmbed('#vis03', 'js/03_online_instore_butterfly.vg.json', opts).catch(console.error);
+  vegaEmbed('#vis04', 'js/04_platform_waffle.vg.json', opts).catch(console.error);
+  vegaEmbed('#vis05', 'js/05_price_index_lines.vg.json', opts).catch(console.error);
+  vegaEmbed('#vis06', 'js/06_urban_rural_dumbbell.vg.json', opts).catch(console.error);
+  vegaEmbed('#vis07', 'js/07_state_year_heatmap.vg.json', opts).catch(console.error);
+  vegaEmbed('#vis08', 'js/08_jobs_symbol_map.vg.json', opts).catch(console.error);
+  vegaEmbed('#vis09', 'js/09_trade_panels.vg.json', opts).catch(console.error);
+  vegaEmbed('#vis10', 'js/10_money_per_kitchen_slope.vg.json', opts).catch(console.error);
+  vegaEmbed('#vis11', 'js/11_cuisine_isotype.vg.json', opts).catch(console.error);
+  vegaEmbed('#vis12', 'js/12_cuisine_state_heatmap.vg.json', opts).catch(console.error);
+}
+
+document.fonts.load("13px 'Bricolage Grotesque'").then(embedAll, embedAll);
+
+var observer = new IntersectionObserver(function (entries) {
+  entries.forEach(function (entry) {
+    if (entry.isIntersecting && stageView && !isStatic) {
+      stageView.signal('step', Number(entry.target.dataset.step)).runAsync();
+    }
+  });
+}, {"rootMargin": "-50% 0px -50% 0px"});
+document.querySelectorAll('.step').forEach(function (el) {
+  observer.observe(el);
+});
+</script>
+</body>
+</html>

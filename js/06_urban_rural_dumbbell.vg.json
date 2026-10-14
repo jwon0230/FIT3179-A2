@@ -1,0 +1,178 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "Eating out and hotels rose in price faster in towns than in the country",
+    "subtitle": "Price change from January 2019 to August 2026, by spending group, Malaysia"
+  },
+  "width": "container",
+  "height": 400,
+  "data": {
+    "url": "data/cpi_strata_division.csv",
+    "format": {"parse": {"urban_change_pct": "number", "rural_change_pct": "number"}}
+  },
+  "transform": [
+    {"calculate": "datum.urban_change_pct - datum.rural_change_pct", "as": "gap"},
+    {"calculate": "format(datum.gap, '.1f') + ' points'", "as": "gap_text"},
+    {"calculate": "format(datum.urban_change_pct, '.1f') + '%'", "as": "urban_text"},
+    {"calculate": "format(datum.rural_change_pct, '.1f') + '%'", "as": "rural_text"}
+  ],
+  "encoding": {
+    "y": {
+      "field": "division_short",
+      "type": "nominal",
+      "title": "Spending group",
+      "sort": [
+        "Eating out and hotels",
+        "Food and drink",
+        "Education",
+        "Transport",
+        "Household goods",
+        "Recreation and culture",
+        "Alcohol and tobacco",
+        "Personal care and other",
+        "Housing and utilities",
+        "Insurance and finance",
+        "Health",
+        "Clothing and shoes",
+        "Phone and internet"
+      ],
+      "axis": {"labelLimit": 200, "titlePadding": 10}
+    }
+  },
+  "layer": [
+    {
+      "data": {"values": [{"zero": 0}]},
+      "mark": {"type": "rule", "color": "#999999", "strokeWidth": 1},
+      "encoding": {
+        "x": {"field": "zero", "type": "quantitative", "scale": {"domain": [-8, 38]}},
+        "y": null
+      }
+    },
+    {
+      "mark": {"type": "rule", "strokeWidth": 2},
+      "encoding": {
+        "x": {
+          "field": "rural_change_pct",
+          "type": "quantitative",
+          "title": "Price change since January 2019 (%)",
+          "scale": {"domain": [-8, 38]},
+          "axis": {"values": [-5, 0, 5, 10, 15, 20, 25], "format": ".0f", "grid": true, "domain": false, "titlePadding": 10}
+        },
+        "x2": {"field": "urban_change_pct"},
+        "color": {
+          "condition": {"test": "datum.division_short == 'Eating out and hotels'", "value": "#2e6b3f"},
+          "value": "#999999"
+        },
+        "tooltip": [
+          {"field": "division_short", "title": "Spending group"},
+          {"field": "urban_text", "title": "Town prices since January 2019"},
+          {"field": "rural_text", "title": "Country prices since January 2019"},
+          {"field": "gap_text", "title": "Gap between the two"}
+        ]
+      }
+    },
+    {
+      "transform": [
+        {"fold": ["urban_change_pct", "rural_change_pct"], "as": ["strata_field", "change"]},
+        {"calculate": "datum.strata_field == 'urban_change_pct' ? 'Town' : 'Country'", "as": "strata"},
+        {"calculate": "format(datum.change, '.1f') + '%'", "as": "change_text"}
+      ],
+      "mark": {"type": "point", "filled": true, "size": 140, "stroke": "#555555", "strokeWidth": 2, "opacity": 1},
+      "encoding": {
+        "x": {"field": "change", "type": "quantitative", "scale": {"domain": [-8, 38]}},
+        "fill": {
+          "field": "strata",
+          "type": "nominal",
+          "title": "Where people live",
+          "scale": {"domain": ["Town", "Country"], "range": ["#555555", "#ffffff"]},
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal",
+            "titleOrient": "top",
+            "symbolType": "circle",
+            "symbolSize": 140,
+            "symbolStrokeColor": "#555555",
+            "symbolStrokeWidth": 2,
+            "columnPadding": 18
+          }
+        },
+        "tooltip": [
+          {"field": "division_short", "title": "Spending group"},
+          {"field": "strata", "title": "Where people live"},
+          {"field": "change_text", "title": "Price change since January 2019"},
+          {"field": "gap_text", "title": "Gap between town and country"}
+        ]
+      }
+    },
+    {
+      "data": {"values": [{"division_short": "Eating out and hotels", "x": 24.0, "x2": 25.2}]},
+      "mark": {"type": "rule", "color": "#111111", "strokeWidth": 0.8},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative", "scale": {"domain": [-8, 38]}},
+        "x2": {"field": "x2"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "division_short": "Eating out and hotels",
+            "x": 25.6,
+            "lines": ["Eating out and hotels: 24.0% in", "towns, 15.9% in the country, the", "widest gap of the thirteen groups"]
+          }
+        ]
+      },
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 13, "lineHeight": 17, "color": "#111111"},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative", "scale": {"domain": [-8, 38]}},
+        "text": {"field": "lines"}
+      }
+    }
+  ],
+  "config": {
+    "font": "'Bricolage Grotesque', Arial, sans-serif",
+    "background": "#ffffff",
+    "view": {"stroke": null},
+    "title": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 22,
+      "fontWeight": 700,
+      "color": "#111111",
+      "anchor": "start",
+      "offset": 14,
+      "subtitleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "subtitleFontSize": 15,
+      "subtitleColor": "#666666",
+      "subtitlePadding": 6
+    },
+    "axis": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#555555",
+      "labelPadding": 6,
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "domainColor": "#999999",
+      "tickColor": "#999999",
+      "gridColor": "#ebebeb"
+    },
+    "legend": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#333333",
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "titlePadding": 6
+    },
+    "text": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 14,
+      "color": "#111111"
+    },
+    "rule": {"color": "#111111"}
+  }
+}

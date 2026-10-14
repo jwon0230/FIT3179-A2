@@ -1,0 +1,202 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "Selangor's eating places employ 292,295 people, the most of any state",
+    "subtitle": [
+      "People working in eating places, by state, Malaysia, 2022",
+      "Circle area is the number of people. 1,079,843 people in all."
+    ],
+    "anchor": "middle"
+  },
+  "width": "container",
+  "height": 460,
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [4.37, -4.37],
+    "rotate": [-109.6, 0],
+    "fit": {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {"type": "MultiPoint", "coordinates": [[94.6, 0.6], [119.4, 7.6]]}
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/my_states.topo.json",
+        "format": {"type": "topojson", "feature": "states"}
+      },
+      "mark": {"type": "geoshape", "fill": "#e8e8e8", "stroke": "#999999", "strokeWidth": 0.5},
+      "encoding": {"tooltip": {"value": "No data"}}
+    },
+    {
+      "data": {
+        "url": "data/census_state.csv",
+        "format": {"parse": {"persons_engaged": "number", "establishments": "number"}}
+      },
+      "transform": [
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "url": "data/my_states.topo.json",
+              "format": {"type": "topojson", "feature": "states"}
+            },
+            "key": "properties.state"
+          },
+          "as": "geo"
+        }
+      ],
+      "mark": {"type": "geoshape", "fill": "#e8e8e8", "stroke": "#999999", "strokeWidth": 0.5},
+      "encoding": {
+        "shape": {"field": "geo", "type": "geojson"},
+        "tooltip": [
+          {"field": "state", "title": "State"},
+          {"field": "persons_engaged", "title": "People working in eating places", "format": ","},
+          {"field": "establishments", "title": "Eating places", "format": ","}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/census_state.csv",
+        "format": {
+          "parse": {
+            "lon": "number",
+            "lat": "number",
+            "persons_engaged": "number",
+            "establishments": "number"
+          }
+        }
+      },
+      "mark": {
+        "type": "circle",
+        "fill": "#2b8cbe",
+        "fillOpacity": 0.65,
+        "stroke": "#ffffff",
+        "strokeWidth": 0.7
+      },
+      "encoding": {
+        "longitude": {"field": "lon"},
+        "latitude": {"field": "lat"},
+        "order": {"field": "persons_engaged", "type": "quantitative", "sort": "descending"},
+        "stroke": {"condition": {"test": "datum.state === 'Selangor'", "value": "#2e6b3f"}, "value": "#ffffff"},
+        "strokeWidth": {"condition": {"test": "datum.state === 'Selangor'", "value": 2}, "value": 0.7},
+        "size": {
+          "field": "persons_engaged",
+          "type": "quantitative",
+          "title": "People working in eating places, 2022",
+          "scale": {"domain": [0, 292295], "range": [0, 2500]},
+          "legend": {
+            "orient": "none",
+            "legendX": {"expr": "width / 2 - 154"},
+            "legendY": {"expr": "height - 76"},
+            "direction": "horizontal",
+            "titleOrient": "top",
+            "titleAnchor": "middle",
+            "columnPadding": 16,
+            "values": [50000, 150000, 250000],
+            "labelExpr": "format(datum.value, ',')",
+            "symbolType": "circle",
+            "symbolFillColor": "#2b8cbe",
+            "symbolOpacity": 0.65,
+            "symbolStrokeColor": "#ffffff",
+            "symbolStrokeWidth": 0.7,
+            "titleLimit": 240,
+            "labelOffset": 8
+          }
+        },
+        "tooltip": [
+          {"field": "state", "title": "State"},
+          {"field": "persons_engaged", "title": "People working in eating places", "format": ","},
+          {"field": "establishments", "title": "Eating places", "format": ","}
+        ]
+      }
+    },
+    {
+      "data": {"values": [{"lon": 101.32, "lat": 3.16, "lon2": 98.85, "lat2": 4.9}]},
+      "mark": {"type": "rule", "color": "#111111", "strokeWidth": 0.8},
+      "encoding": {
+        "longitude": {"field": "lon"},
+        "latitude": {"field": "lat"},
+        "longitude2": {"field": "lon2"},
+        "latitude2": {"field": "lat2"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon2": 98.85,
+            "lat2": 4.9,
+            "lines": [
+              "Selangor 292,295,",
+              "Kuala Lumpur 153,179 and",
+              "Putrajaya 5,459 together",
+              "hold two in five"
+            ]
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -6,
+        "fontSize": 14,
+        "lineHeight": 18,
+        "baseline": "middle"
+      },
+      "encoding": {
+        "longitude": {"field": "lon2"},
+        "latitude": {"field": "lat2"},
+        "text": {"field": "lines"}
+      }
+    }
+  ],
+  "config": {
+    "font": "'Bricolage Grotesque', Arial, sans-serif",
+    "background": "#ffffff",
+    "view": {"stroke": null},
+    "title": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 22,
+      "fontWeight": 700,
+      "color": "#111111",
+      "anchor": "start",
+      "offset": 14,
+      "subtitleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "subtitleFontSize": 15,
+      "subtitleColor": "#666666",
+      "subtitlePadding": 6
+    },
+    "axis": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#555555",
+      "labelPadding": 6,
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "domainColor": "#999999",
+      "tickColor": "#999999",
+      "gridColor": "#ebebeb"
+    },
+    "legend": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#333333",
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "titlePadding": 6
+    },
+    "text": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 14,
+      "color": "#111111"
+    },
+    "rule": {"color": "#111111"}
+  }
+}

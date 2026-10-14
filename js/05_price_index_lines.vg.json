@@ -1,0 +1,205 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "A meal out has risen in price faster than food cooked at home",
+    "subtitle": "Price index for Malaysia, January 2015 to August 2026, with the first month set to 100"
+  },
+  "width": "container",
+  "height": 360,
+  "data": {
+    "url": "data/cpi_national_monthly.csv",
+    "format": {"parse": {"date": "date", "index": "number", "index_jan2015_100": "number"}}
+  },
+  "transform": [
+    {
+      "calculate": "datum.series == 'Prepared meals' ? 'A meal out' : datum.series == 'Food at home' ? 'Food cooked at home' : 'Everything Malaysians buy'",
+      "as": "priced"
+    },
+    {"calculate": "format(datum.index_jan2015_100 - 100, '+.1f') + '%'", "as": "change_text"}
+  ],
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "title": "Month",
+      "axis": {"format": "%Y", "tickCount": {"interval": "year", "step": 1}, "labelAngle": 0, "grid": false}
+    },
+    "y": {
+      "field": "index_jan2015_100",
+      "type": "quantitative",
+      "title": "Price index, January 2015 = 100",
+      "scale": {"domain": [98, 150]},
+      "axis": {"tickCount": 6, "grid": true}
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/timeline_events.csv",
+        "format": {"parse": {"date": "date"}}
+      },
+      "mark": {"type": "rule", "color": "#999999", "strokeWidth": 0.8, "strokeDash": [4, 3]},
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": null,
+        "tooltip": [
+          {"field": "date", "type": "temporal", "title": "Date", "format": "%e %B %Y"},
+          {"field": "label", "title": "What happened"},
+          {"field": "detail", "title": "In full"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/timeline_events.csv",
+        "format": {"parse": {"date": "date"}}
+      },
+      "transform": [
+        {"filter": {"field": "label", "oneOf": ["Movement Control Order", "foodpanda sale called off"]}},
+        {"calculate": "datum.label == 'foodpanda sale called off' ? 107.5 : 101.2", "as": "label_y"}
+      ],
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 5, "fontSize": 13, "color": "#555555"},
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"field": "label_y", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {
+        "url": "data/timeline_events.csv",
+        "format": {"parse": {"date": "date"}}
+      },
+      "transform": [
+        {"filter": "datum.label == 'Gig Workers Act in force'"},
+        {"calculate": "101.2", "as": "label_y"}
+      ],
+      "mark": {"type": "text", "align": "right", "baseline": "middle", "dx": -5, "fontSize": 13, "color": "#555555"},
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"field": "label_y", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "mark": {"type": "line", "interpolate": "monotone"},
+      "encoding": {
+        "color": {
+          "field": "priced",
+          "type": "nominal",
+          "title": "What is being priced",
+          "scale": {
+            "domain": ["A meal out", "Food cooked at home", "Everything Malaysians buy"],
+            "range": ["#2e6b3f", "#555555", "#999999"]
+          },
+          "legend": {
+            "orient": "none",
+            "legendX": 14,
+            "legendY": 10,
+            "direction": "vertical",
+            "titleOrient": "top",
+            "symbolType": "stroke",
+            "symbolStrokeWidth": 2.4,
+            "labelLimit": 220,
+            "fillColor": "#ffffff",
+            "padding": 8
+          }
+        },
+        "strokeWidth": {
+          "condition": {"test": "datum.priced == 'A meal out'", "value": 2.6},
+          "value": 1.6
+        }
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "opacity": 0, "size": 70},
+      "encoding": {
+        "tooltip": [
+          {"field": "date", "type": "temporal", "title": "Month", "format": "%B %Y"},
+          {"field": "priced", "title": "What is being priced"},
+          {"field": "index_jan2015_100", "title": "Price index, January 2015 = 100", "format": ".1f"},
+          {"field": "change_text", "title": "Change since January 2015"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"x": "2025-10-01", "y": 146.0, "x2": "2026-07-15", "y2": 143.6}
+        ]
+      },
+      "transform": [{"calculate": "toDate(datum.x)", "as": "xd"}, {"calculate": "toDate(datum.x2)", "as": "x2d"}],
+      "mark": {"type": "rule", "color": "#111111", "strokeWidth": 0.8},
+      "encoding": {
+        "x": {"field": "xd", "type": "temporal"},
+        "x2": {"field": "x2d"},
+        "y": {"field": "y", "type": "quantitative"},
+        "y2": {"field": "y2"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": "2022-07-01",
+            "y": 147.2,
+            "lines": ["By August 2026 a meal out costs 42.9% more", "than in January 2015, against 26.0% for", "food cooked at home"]
+          }
+        ]
+      },
+      "transform": [{"calculate": "toDate(datum.x)", "as": "xd"}],
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 14, "lineHeight": 18, "color": "#111111"},
+      "encoding": {
+        "x": {"field": "xd", "type": "temporal"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "lines"}
+      }
+    }
+  ],
+  "config": {
+    "font": "'Bricolage Grotesque', Arial, sans-serif",
+    "background": "#ffffff",
+    "view": {"stroke": null},
+    "title": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 22,
+      "fontWeight": 700,
+      "color": "#111111",
+      "anchor": "start",
+      "offset": 14,
+      "subtitleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "subtitleFontSize": 15,
+      "subtitleColor": "#666666",
+      "subtitlePadding": 6
+    },
+    "axis": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#555555",
+      "labelPadding": 6,
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "domainColor": "#999999",
+      "tickColor": "#999999",
+      "gridColor": "#ebebeb"
+    },
+    "legend": {
+      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFontSize": 13,
+      "labelColor": "#333333",
+      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFontSize": 13,
+      "titleFontWeight": 600,
+      "titleColor": "#333333",
+      "titlePadding": 6
+    },
+    "text": {
+      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "fontSize": 14,
+      "color": "#111111"
+    },
+    "rule": {"color": "#111111"}
+  }
+}
