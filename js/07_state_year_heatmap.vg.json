@@ -68,7 +68,7 @@
               "title": "Change in the price of eating out and hotels over the year",
               "scale": {
                 "domain": ["Prices fell", "0 to 2%", "2 to 4%", "4 to 6%", "6% or more"],
-                "range": ["#f1eef6", "#bdc9e1", "#74a9cf", "#2b8cbe", "#045a8d"]
+                "range": ["#f2f0f7", "#cbc9e2", "#9e9ac8", "#756bb1", "#54278f"]
               },
               "legend": {
                 "orient": "top",
@@ -155,7 +155,7 @@
           "encoding": {
             "color": {
               "condition": {"test": "datum.state == 'Putrajaya'", "value": "#2e6b3f"},
-              "value": "#2b8cbe"
+              "value": "#555555"
             },
             "tooltip": [
               {"field": "state", "title": "State"},

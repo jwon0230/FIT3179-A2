@@ -3,7 +3,8 @@
   "title": {
     "text": "Kuala Lumpur has the most eating places for its people",
     "subtitle": "Eating places for every 100,000 people, by state, Malaysia, 2022",
-    "anchor": "middle"
+    "anchor": "start",
+    "dx": {"expr": "width / 2 - 515"}
   },
   "width": "container",
   "height": 520,

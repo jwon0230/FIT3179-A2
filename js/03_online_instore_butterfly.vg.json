@@ -49,7 +49,6 @@
               "scale": {"domain": [0, 100], "reverse": true},
               "axis": {
                 "title": "Bought online",
-                "titleColor": "#7570b3",
                 "values": [0, 50, 100],
                 "labelExpr": "datum.value + '%'",
                 "grid": true
@@ -72,18 +71,8 @@
               }
             },
             "color": {
-              "field": "where",
-              "type": "nominal",
-              "scale": {"domain": ["Online", "In a shop"], "range": ["#7570b3", "#d95f02"]},
-              "legend": null
-            },
-            "stroke": {
               "condition": {"test": "datum.short === 'Food and health'", "value": "#2e6b3f"},
-              "value": null
-            },
-            "strokeWidth": {
-              "condition": {"test": "datum.short === 'Food and health'", "value": 1.6},
-              "value": 0
+              "value": "#555555"
             },
             "tooltip": [
               {"field": "category", "title": "What they bought"},
@@ -121,7 +110,6 @@
               "scale": {"domain": [0, 100]},
               "axis": {
                 "title": "Bought in a shop",
-                "titleColor": "#d95f02",
                 "values": [0, 50, 100],
                 "labelExpr": "datum.value + '%'",
                 "grid": true
@@ -134,18 +122,8 @@
               "axis": null
             },
             "color": {
-              "field": "where",
-              "type": "nominal",
-              "scale": {"domain": ["Online", "In a shop"], "range": ["#7570b3", "#d95f02"]},
-              "legend": null
-            },
-            "stroke": {
               "condition": {"test": "datum.short === 'Food and health'", "value": "#2e6b3f"},
-              "value": null
-            },
-            "strokeWidth": {
-              "condition": {"test": "datum.short === 'Food and health'", "value": 1.6},
-              "value": 0
+              "value": "#555555"
             },
             "tooltip": [
               {"field": "category", "title": "What they bought"},

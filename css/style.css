@@ -93,12 +93,16 @@ a {
 .key {
   color: #2e6b3f;
 }
+.key.shopeefood {
+  color: #a8400e;
+}
 h2 {
   font-family: 'Bricolage Grotesque', Arial, sans-serif;
   font-weight: 800;
   letter-spacing: -0.5px;
   font-size: 34px;
   line-height: 38px;
+  text-wrap: balance;
   margin: 0 0 16px;
 }
 .opener {
@@ -164,10 +168,28 @@ figcaption, .credit {
   line-height: 22px;
   color: #666666;
   max-width: 440px;
-  margin: 12px auto 0;
+  margin: 12px 0 0;
 }
 .credit {
   margin-bottom: 56px;
+}
+
+/* text on the figure edge */
+.wide, .pair {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+.pair {
+  display: flex;
+  gap: 30px;
+}
+.pair > div {
+  flex: 0 0 505px;
+}
+.pair p {
+  max-width: 440px;
+  margin-bottom: 0;
 }
 .chart {
   width: 100%;

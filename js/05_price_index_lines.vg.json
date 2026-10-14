@@ -38,10 +38,12 @@
         "url": "data/timeline_events.csv",
         "format": {"parse": {"date": "date"}}
       },
+      "transform": [{"calculate": "139", "as": "rule_top"}],
       "mark": {"type": "rule", "color": "#999999", "strokeWidth": 0.8, "strokeDash": [4, 3]},
       "encoding": {
         "x": {"field": "date", "type": "temporal"},
-        "y": null,
+        "y": {"field": "rule_top", "type": "quantitative"},
+        "y2": {"datum": 98},
         "tooltip": [
           {"field": "date", "type": "temporal", "title": "Date", "format": "%e %B %Y"},
           {"field": "label", "title": "What happened"},
