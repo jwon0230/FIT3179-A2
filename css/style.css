@@ -11,16 +11,133 @@ body {
   margin: 0 auto;
   padding: 0 16px;
 }
-/* title sign */
+/* title: a Hainanese kopitiam shopfront */
 .hero {
-  background: linear-gradient(#262522 calc(100% - 160px), #ffffff 100%);
-  padding: 72px 0 208px;
-  margin-bottom: 32px;
+  background: #e9e4da;
+  border-bottom: 12px solid #cdc6b8;
+  padding-top: 24px;
+  margin-bottom: 56px;
+}
+.shop {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 16px;
 }
 .sign {
-  max-width: 1040px;
-  margin: 0 auto 48px;
-  padding: 0 16px;
+  position: relative;
+  border: 1px solid #c9c2b4;
+  box-shadow: 0 3px 0 #d6d0c4;
+  background: #f6f4ee;
+  padding: 32px 40px 24px;
+  text-align: center;
+  color: #1e1e1e;
+}
+.sign-label {
+  position: absolute;
+  top: 16px;
+  left: 22px;
+  font-family: 'Bricolage Grotesque', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 22px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0;
+}
+.sign-zh {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 900;
+  font-size: 60px;
+  line-height: 1;
+  color: #b2353b;
+  margin: 0;
+}
+.sign-zh span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 88px;
+  height: 88px;
+  border: 3px solid #b2353b;
+  border-radius: 50%;
+  background: #fbfaf6;
+}
+h1 {
+  font-family: 'Bricolage Grotesque', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin: 6px 0 0;
+}
+.sign-since {
+  font-family: 'Bricolage Grotesque', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin: 6px 0 0;
+}
+.front {
+  display: grid;
+  grid-template-columns: 92px 1fr 92px;
+}
+.pillar {
+  position: relative;
+  background: #22704a;
+  border: 0 solid #f3f0e9;
+  border-width: 0 8px;
+  box-shadow: inset 0 0 0 7px #22704a, inset 0 0 0 9px #f6f3ec;
+}
+.pillar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: #2b8257;
+  border-bottom: 3px solid #f6f3ec;
+}
+.opening {
+  background: #262522;
+  box-shadow: inset 0 22px 26px -14px rgba(0, 0, 0, 0.7);
+  padding-bottom: 56px;
+  min-width: 0;
+}
+.blinds {
+  display: grid;
+  grid-template-columns: 1fr 180px 1fr;
+  gap: 6px;
+  height: 96px;
+  padding: 0 6px;
+  margin-bottom: 32px;
+}
+.blind {
+  background:
+    repeating-linear-gradient(0deg, rgba(70, 40, 20, 0.12) 0 1px, rgba(0, 0, 0, 0) 1px 5px),
+    repeating-linear-gradient(90deg, #b2353b 0 24px, #f3ede0 24px 44px);
+  border-bottom: 5px solid #8a6844;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.45);
+}
+.blind-panel {
+  background:
+    repeating-linear-gradient(0deg, rgba(70, 40, 20, 0.08) 0 1px, rgba(0, 0, 0, 0) 1px 5px),
+    #f4efe2;
+  padding: 0 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.blind-panel svg {
+  display: block;
+  width: 100%;
 }
 .hero .dek {
   color: #e8dfca;
@@ -29,47 +146,48 @@ body {
   color: #b8ae9a;
   margin: 0;
 }
-.sign-panel {
-  border: 10px solid #c9cdd0;
-  outline: 1px solid #8f969b;
-  background: radial-gradient(ellipse at 50% 45%, #ffffff 45%, #f0f0eb 100%);
-  padding: 26px 40px 22px;
-  text-align: center;
-}
-.sign-zh {
-  font-family: 'Noto Serif TC', serif;
-  font-weight: 900;
-  font-size: 80px;
-  line-height: 92px;
-  letter-spacing: 24px;
-  text-indent: 24px;
-  color: #9e2e34;
-  margin: 0;
-}
-h1 {
-  font-family: 'Newsreader', Georgia, serif;
-  font-weight: 800;
-  font-size: 76px;
-  line-height: 80px;
-  letter-spacing: -1px;
-  color: #2e563a;
-  margin: 4px 0 0;
-}
-.sign-price {
-  font-family: 'Bricolage Grotesque', Arial, sans-serif;
-  font-weight: 800;
-  font-size: 28px;
-  line-height: 32px;
-  color: #9e2e34;
-  text-align: right;
-  margin: 2px 0 0;
-}
-.sign-price span {
-  display: block;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 22px;
-  color: #333333;
+@media (max-width: 760px) {
+  .sign {
+    padding: 36px 12px 18px;
+  }
+  .sign-label {
+    top: 10px;
+    left: 12px;
+    font-size: 13px;
+  }
+  .sign-zh {
+    gap: 2vw;
+    font-size: 7.5vw;
+  }
+  .sign-zh span {
+    width: 11vw;
+    height: 11vw;
+    border-width: 2px;
+  }
+  h1 {
+    font-size: 6.4vw;
+    line-height: 1.25;
+    letter-spacing: 0.5vw;
+  }
+  .sign-since {
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 1px;
+  }
+  .front {
+    grid-template-columns: 30px 1fr 30px;
+  }
+  .pillar {
+    border-width: 0 4px;
+    box-shadow: inset 0 0 0 4px #22704a, inset 0 0 0 6px #f6f3ec;
+  }
+  .blinds {
+    grid-template-columns: 1fr 150px 1fr;
+    gap: 4px;
+    height: 80px;
+    padding: 0 4px;
+    margin-bottom: 36px;
+  }
 }
 .dek {
   font-size: 23px;
@@ -94,7 +212,7 @@ a {
   color: #2e6b3f;
 }
 .key.shopeefood {
-  color: #a8400e;
+  color: #d8391d;
 }
 h2 {
   font-family: 'Bricolage Grotesque', Arial, sans-serif;

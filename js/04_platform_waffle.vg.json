@@ -37,7 +37,7 @@
             "color": {
               "field": "platform",
               "type": "nominal",
-              "scale": {"domain": ["Grab", "foodpanda", "ShopeeFood"], "range": ["#00b14f", "#f49ac1", "#a8400e"]},
+              "scale": {"domain": ["Grab", "foodpanda", "ShopeeFood"], "range": ["#00b14f", "#d20060", "#fe5b39"]},
               "legend": null
             },
             "tooltip": [
@@ -95,7 +95,7 @@
             "color": {
               "field": "platform",
               "type": "nominal",
-              "scale": {"domain": ["Grab", "foodpanda", "ShopeeFood"], "range": ["#00b14f", "#f49ac1", "#a8400e"]},
+              "scale": {"domain": ["Grab", "foodpanda", "ShopeeFood"], "range": ["#00b14f", "#d20060", "#fe5b39"]},
               "legend": null
             },
             "tooltip": [
@@ -153,7 +153,7 @@
             {"calculate": "datum.mean_row + 0.44", "as": "label_row"},
             {"calculate": "datum.platform + ' ' + datum.share + '%, up from ' + datum.share_2023 + '%'", "as": "label"}
           ],
-          "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 13, "fontWeight": 700, "color": "#a8400e"},
+          "mark": {"type": "text", "align": "left", "baseline": "middle", "fontSize": 13, "fontWeight": 700, "color": "#d8391d"},
           "encoding": {
             "x": {"datum": 10.5, "type": "quantitative"},
             "y": {"field": "label_row", "type": "quantitative"},
