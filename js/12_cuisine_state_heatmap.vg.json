@@ -3,10 +3,12 @@
   "title": {
     "text": "Western and fast food leads in eight of the twelve states",
     "subtitle": [
-      "Each kind of food's share of a state's mapped eating places that name a cuisine, Malaysia, October 2026",
+      "Each kind of food's share of a state's mapped eating places that name a cuisine, Malaysia, October 2026.",
       "The twelve states with at least 200 such outlets. Darker cells are larger shares; a white dot marks each state's biggest group."
-    ]
+    ],
+    "dx": -5
   },
+  "padding": {"left": 0, "top": 5, "right": 5, "bottom": 5},
   "width": "container",
   "height": 420,
   "encoding": {
@@ -19,7 +21,7 @@
         "Chinese",
         "Malaysian",
         "Coffee and drinks",
-        "Other and unspecified",
+        "Other cuisines",
         "Sweets and bakery",
         "Japanese and Korean",
         "Indian",

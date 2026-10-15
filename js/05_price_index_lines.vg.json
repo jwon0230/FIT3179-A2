@@ -2,8 +2,10 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "title": {
     "text": "A meal out has risen in price faster than food cooked at home",
-    "subtitle": "Price index for Malaysia, January 2015 to August 2026, with the first month set to 100"
+    "subtitle": "Price index for Malaysia, January 2015 to August 2026, with the first month set to 100.",
+    "dx": -5
   },
+  "padding": {"left": 0, "top": 5, "right": 5, "bottom": 5},
   "width": "container",
   "height": 360,
   "data": {

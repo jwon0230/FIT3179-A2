@@ -6,8 +6,10 @@
       "Share of the money Malaysians spent on food delivery,",
       "by platform, 2023 and 2024. One square is one per cent.",
       "Ringgit at Bank Negara Malaysia's average rate for the year."
-    ]
+    ],
+    "dx": -5
   },
+  "padding": {"left": 0, "top": 5, "right": 5, "bottom": 5},
   "spacing": 26,
   "vconcat": [
     {

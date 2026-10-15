@@ -3,10 +3,12 @@
   "title": {
     "text": "More mapped outlets serve Western and fast food than any other kind",
     "subtitle": [
-      "Mapped eating places by the kind of food they serve, Malaysia, October 2026",
+      "Mapped eating places by the kind of food they serve, Malaysia, October 2026.",
       "One plate is 100 outlets, rounded to the nearest plate. 13,160 of 26,744 mapped outlets name a cuisine."
-    ]
+    ],
+    "dx": -5
   },
+  "padding": {"left": 0, "top": 5, "right": 5, "bottom": 5},
   "width": "container",
   "height": 360,
   "encoding": {
@@ -20,7 +22,7 @@
         "Chinese",
         "Malaysian",
         "Coffee and drinks",
-        "Other and unspecified",
+        "Other cuisines",
         "Sweets and bakery",
         "Japanese and Korean",
         "Indian",
@@ -71,7 +73,7 @@
         "values": [
           {
             "icon": 31,
-            "cuisine_group": "Other and unspecified",
+            "cuisine_group": "Other cuisines",
             "lines": [
               "3,090 outlets are Western and fast food,",
               "23.5% of the 13,160 that name a cuisine.",

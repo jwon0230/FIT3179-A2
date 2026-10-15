@@ -3,11 +3,13 @@
   "title": {
     "text": "Eating out and hotels rose most in Putrajaya, with 18.4% in 2022 alone",
     "subtitle": [
-      "Cells: the change in the price of eating out and hotels over each year, by state, 2011 to 2025",
-      "Bars: the change in the same prices from January 2019 to August 2026"
+      "Cells: the change in the price of eating out and hotels over each year, by state, 2011 to 2025.",
+      "Bars: the change in the same prices from January 2019 to August 2026."
     ],
-    "anchor": "start"
+    "anchor": "start",
+    "dx": -5
   },
+  "padding": {"left": 0, "top": 5, "right": 5, "bottom": 5},
   "spacing": 24,
   "hconcat": [
     {

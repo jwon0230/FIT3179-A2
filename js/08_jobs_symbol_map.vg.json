@@ -3,11 +3,13 @@
   "title": {
     "text": "Selangor's eating places employ 292,295 people, the most of any state",
     "subtitle": [
-      "People working in eating places, by state, Malaysia, 2022",
+      "People working in eating places, by state, Malaysia, 2022.",
       "Circle area is the number of people. 1,079,843 people in all."
     ],
-    "anchor": "start"
+    "anchor": "start",
+    "dx": -5
   },
+  "padding": {"left": 0, "top": 5, "right": 5, "bottom": 5},
   "width": "container",
   "height": 460,
   "projection": {

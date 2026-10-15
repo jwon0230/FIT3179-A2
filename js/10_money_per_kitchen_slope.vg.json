@@ -5,9 +5,11 @@
     "subtitle": [
       "Money taken divided by the number of eating places,",
       "by part of the trade, Malaysia, census years 2015 and 2022,",
-      "in ringgit of each year, not adjusted for prices"
-    ]
+      "in ringgit of each year, not adjusted for prices."
+    ],
+    "dx": -5
   },
+  "padding": {"left": 0, "top": 5, "right": 5, "bottom": 5},
   "width": 207,
   "height": 330,
   "layer": [

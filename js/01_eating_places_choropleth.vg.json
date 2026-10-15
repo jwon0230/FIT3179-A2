@@ -2,9 +2,9 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "title": {
     "text": "Kuala Lumpur has the most eating places for its people",
-    "subtitle": "Eating places for every 100,000 people, by state, Malaysia, 2022",
+    "subtitle": "Eating places for every 100,000 people, by state, Malaysia, 2022.",
     "anchor": "start",
-    "dx": {"expr": "width / 2 - 515"}
+    "dx": {"expr": "width / 2 - 520"}
   },
   "width": "container",
   "height": 520,

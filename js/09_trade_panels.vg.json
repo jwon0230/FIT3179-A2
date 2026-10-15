@@ -3,10 +3,12 @@
   "title": {
     "text": ["Eating places fell after 2015", "while the money and the jobs rose"],
     "subtitle": [
-      "Malaysia's eating places in the census years 2010, 2015 and 2022",
-      "Each panel has its own scale, so read the lengths within a panel"
-    ]
+      "Malaysia's eating places in the census years 2010, 2015 and 2022.",
+      "Each panel has its own scale, so read the lengths within a panel."
+    ],
+    "dx": -5
   },
+  "padding": {"left": 0, "top": 5, "right": 5, "bottom": 5},
   "spacing": 22,
   "data": {
     "url": "data/census_national.csv",

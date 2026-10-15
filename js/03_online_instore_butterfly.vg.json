@@ -2,8 +2,10 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "title": {
     "text": ["Food and health essentials are the one", "thing where the shop beats online"],
-    "subtitle": ["Of internet users who paid without cash in each channel,", "the share who bought each thing, Malaysia, 2024,", "for the eight things where both ways reach 10%"]
+    "subtitle": ["Share of internet users who bought each thing, Malaysia, 2024.", "Each side counts only those who paid without cash that way.", "The eight things where both sides reach 10%."],
+    "dx": -5
   },
+  "padding": {"left": 0, "top": 5, "right": 5, "bottom": 5},
   "spacing": 145,
   "bounds": "flush",
   "resolve": {"scale": {"x": "independent"}},

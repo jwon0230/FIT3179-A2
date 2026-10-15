@@ -1,9 +1,11 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "title": {
-    "text": "Eating out and hotels rose in price faster in towns than in the country",
-    "subtitle": "Price change from January 2019 to August 2026, by spending group, Malaysia"
+    "text": "Eating out and hotels rose in price faster in towns than in rural areas",
+    "subtitle": "Price change from January 2019 to August 2026, by spending group, Malaysia.",
+    "dx": -5
   },
+  "padding": {"left": 0, "top": 5, "right": 5, "bottom": 5},
   "width": "container",
   "height": 400,
   "data": {
@@ -66,7 +68,7 @@
         "tooltip": [
           {"field": "division_short", "title": "Spending group"},
           {"field": "urban_text", "title": "Town prices since January 2019"},
-          {"field": "rural_text", "title": "Country prices since January 2019"},
+          {"field": "rural_text", "title": "Rural prices since January 2019"},
           {"field": "gap_text", "title": "Gap between the two"}
         ]
       }
@@ -74,7 +76,7 @@
     {
       "transform": [
         {"fold": ["urban_change_pct", "rural_change_pct"], "as": ["strata_field", "change"]},
-        {"calculate": "datum.strata_field == 'urban_change_pct' ? 'Town' : 'Country'", "as": "strata"},
+        {"calculate": "datum.strata_field == 'urban_change_pct' ? 'Towns' : 'Rural areas'", "as": "strata"},
         {"calculate": "format(datum.change, '.1f') + '%'", "as": "change_text"}
       ],
       "mark": {"type": "point", "filled": true, "size": 140, "stroke": "#555555", "strokeWidth": 2, "opacity": 1},
@@ -84,7 +86,7 @@
           "field": "strata",
           "type": "nominal",
           "title": "Where people live",
-          "scale": {"domain": ["Town", "Country"], "range": ["#555555", "#ffffff"]},
+          "scale": {"domain": ["Towns", "Rural areas"], "range": ["#555555", "#ffffff"]},
           "legend": {
             "orient": "top",
             "direction": "horizontal",
@@ -100,7 +102,7 @@
           {"field": "division_short", "title": "Spending group"},
           {"field": "strata", "title": "Where people live"},
           {"field": "change_text", "title": "Price change since January 2019"},
-          {"field": "gap_text", "title": "Gap between town and country"}
+          {"field": "gap_text", "title": "Gap between towns and rural areas"}
         ]
       }
     },
@@ -118,7 +120,7 @@
           {
             "division_short": "Eating out and hotels",
             "x": 25.6,
-            "lines": ["Eating out and hotels: 24.0% in", "towns, 15.9% in the country, the", "widest gap of the thirteen groups"]
+            "lines": ["Eating out and hotels: 24.0% in", "towns, 15.9% in rural areas, the", "widest gap of the thirteen groups"]
           }
         ]
       },
