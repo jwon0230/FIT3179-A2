@@ -153,27 +153,27 @@
     }
   ],
   "config": {
-    "font": "'Bricolage Grotesque', Arial, sans-serif",
+    "font": "'Archivo', Arial, sans-serif",
     "background": "#ffffff",
     "view": {"stroke": null},
     "title": {
-      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "font": "'Archivo', Arial, sans-serif",
       "fontSize": 22,
       "fontWeight": 700,
       "color": "#111111",
       "anchor": "start",
       "offset": 14,
-      "subtitleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "subtitleFont": "'Archivo', Arial, sans-serif",
       "subtitleFontSize": 15,
       "subtitleColor": "#666666",
       "subtitlePadding": 6
     },
     "axis": {
-      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFont": "'Archivo', Arial, sans-serif",
       "labelFontSize": 13,
       "labelColor": "#555555",
       "labelPadding": 6,
-      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFont": "'Archivo', Arial, sans-serif",
       "titleFontSize": 13,
       "titleFontWeight": 600,
       "titleColor": "#333333",
@@ -182,17 +182,17 @@
       "gridColor": "#ebebeb"
     },
     "legend": {
-      "labelFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "labelFont": "'Archivo', Arial, sans-serif",
       "labelFontSize": 13,
       "labelColor": "#333333",
-      "titleFont": "'Bricolage Grotesque', Arial, sans-serif",
+      "titleFont": "'Archivo', Arial, sans-serif",
       "titleFontSize": 13,
       "titleFontWeight": 600,
       "titleColor": "#333333",
       "titlePadding": 6
     },
     "text": {
-      "font": "'Bricolage Grotesque', Arial, sans-serif",
+      "font": "'Archivo', Arial, sans-serif",
       "fontSize": 14,
       "color": "#111111"
     },
